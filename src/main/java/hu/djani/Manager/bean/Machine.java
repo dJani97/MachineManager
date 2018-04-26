@@ -33,7 +33,7 @@ public class Machine {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "description")
+	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
 
 	@Column(name = "ip")
@@ -44,12 +44,12 @@ public class Machine {
 
 	@Override
 	public String toString() {
-		return "Machine [id=" + id + ", name=" + name + ", description=" + description + ", ip=" + ip
-				+ ", creationDate=" + creationDate + "]";
+		return "Machine [id=" + this.id + ", name=" + this.name + ", description=" + this.description + ", ip=" + this.ip
+				+ ", creationDate=" + this.creationDate + "]";
 	}
 
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Integer id) {
@@ -57,7 +57,7 @@ public class Machine {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -65,7 +65,7 @@ public class Machine {
 	}
 
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	public void setDescription(String description) {
@@ -73,7 +73,7 @@ public class Machine {
 	}
 
 	public String getIp() {
-		return ip;
+		return this.ip;
 	}
 
 	public void setIp(String ip) {
@@ -81,7 +81,7 @@ public class Machine {
 	}
 
 	public Date getCreationDate() {
-		return creationDate;
+		return this.creationDate;
 	}
 
 	public void setCreationDate(Date creationDate) {

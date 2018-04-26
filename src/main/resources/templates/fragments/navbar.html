@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="hu"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+	<meta charset="utf-8" />
+</head>
+<body>
+	<nav th:fragment="navbar" class="navbar navbar-inverse">   <!-- navbar-default -->
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#my-collapse-navbar">
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span> 
+		      	</button>
+				<a class="navbar-brand" href="/">MachineManager</a>
+			</div>
+			<div class="collapse navbar-collapse"
+				id="my-collapse-navbar">
+				<ul class="nav navbar-nav">
+					<li th:classappend="${currentPage == 'home' ? 'active' : ''}">
+						<a href="/">Kezdőlap</a>
+					</li>
+					<li class="dropdown" th:classappend="${currentPage == 'posts' ? 'active' : ''}">
+						<a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">Virtuális Gépek<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/machine/list">Géppark</a></li>
+							<li><a href="/machine/edit?new=true">+ Hozzáadás</a></li>
+						</ul>
+					</li>
+					
+					<li class="dropdown" th:classappend="${currentPage == 'authors' ? 'active' : ''}">
+						<a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">Felhasználók <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/user/list">Összes felhasználó</a></li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+			    	<li><a href="#"><span class="glyphicon glyphicon-user"></span> Regisztráció</a></li>
+			    	<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Bejelentkezés</a></li>
+			    </ul>
+			</div>
+		</div>
+	</nav>
+</body>
+
