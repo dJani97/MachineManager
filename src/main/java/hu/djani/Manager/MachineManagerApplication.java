@@ -1,4 +1,4 @@
-package hu.djani;
+package hu.djani.Manager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
