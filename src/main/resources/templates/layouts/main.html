@@ -4,18 +4,22 @@
 	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<link rel="stylesheet" href="../static/css/blog.css" th:href="@{/css/blog.css}"/>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
 </head>
 <body>
 
 	<div class="container">
 	
-		<nav th:replace="fragments/navbar :: navbar">Navigation bar</nav>
+		<nav th:replace="fragments/header :: header">Navigation bar</nav>
 		
-		<div layout:fragment="content">Page content</div>
+		<div class="container-fluid">
+			<div layout:fragment="content">Page content</div>
+		</div>
 		
 		<footer th:replace="fragments/footer :: footer">Footer</footer>
 		

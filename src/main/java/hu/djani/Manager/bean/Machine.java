@@ -17,10 +17,10 @@ public class Machine {
 	public Machine() {
 	}
 
-	public Machine(String name, String description, String ip, Date creationDate) {
+	public Machine(String name, String description, String address, Date creationDate) {
 		this.name = name;
 		this.description = description;
-		this.ip = ip;
+		this.address = address;
 		this.creationDate = creationDate;
 	}
 
@@ -36,15 +36,15 @@ public class Machine {
 	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
 
-	@Column(name = "ip")
-	private String ip;
+	@Column(name = "address")
+	private String address;
 
 	@Column(name = "creation_date", columnDefinition = "TIMESTAMP")
 	private Date creationDate;
 
 	@Override
 	public String toString() {
-		return "Machine [id=" + this.id + ", name=" + this.name + ", description=" + this.description + ", ip=" + this.ip
+		return "Machine [id=" + this.id + ", name=" + this.name + ", description=" + this.description + ", ip=" + this.address
 				+ ", creationDate=" + this.creationDate + "]";
 	}
 
@@ -72,12 +72,12 @@ public class Machine {
 		this.description = description;
 	}
 
-	public String getIp() {
-		return this.ip;
+	public String getAddress() {
+		return this.address;
 	}
 
-	public void setIp(String ip) {
-		this.ip = ip;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public Date getCreationDate() {
@@ -87,4 +87,30 @@ public class Machine {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
+
+	//	public boolean getReachable() {
+	//		boolean reachable = false;
+	//
+	//		try {
+	//			reachable = InetAddress.getByName(this.getAddress()).isReachable(10);
+	//		} catch (UnknownHostException e) {
+	//			e.printStackTrace();
+	//		} catch (IOException e) {
+	//			e.printStackTrace();
+	//		}
+	//
+	//		//			Process p1;
+	//		//			try {
+	//		//				p1 = java.lang.Runtime.getRuntime().exec("ping -n 1 -w 50 " + this.getIp());
+	//		//				int returnVal = p1.waitFor();
+	//		//				System.out.println(returnVal);
+	//		//				reachable = (returnVal==0);
+	//		//			} catch (Exception e) {
+	//		//				e.printStackTrace();
+	//		//			}
+	//
+	//		return reachable;
+	//
+	//
+	//	}
 }

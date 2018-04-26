@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+	<div th:fragment="machine" class="panel panel-default" th:object="${machine}">
+		<div class="panel-heading" data-toggle="collapse" th:href="|#*{id}|">
+			<h4 class="panel-title">
+				<i class="fas fa-desktop"> <span th:text="*{name}">Machine Name</span></i>
+<!-- 				<span th:text="*{reachable}"></span> -->
+	    	</h4>
+		</div>
+		
+		<div th:id="*{id}" class="panel-collapse collapse">
+			<div class="panel-body">
+				
+				<p>
+					id:
+					<span th:text="*{id}"></span>
+				</p>
+								
+				<p>
+					name:
+					<span th:text="*{name}"></span>
+				</p>
+								
+				<p>
+					desc:
+					<span th:text="*{description}"></span>
+				</p>
+								
+				<p>
+					date:
+					<span th:text="*{creationDate}"></span>
+				</p>
+
+			</div>
+		</div>
+	</div>
+
+	
+
+
+	<blockquote class="blockquote" th:fragment="post" th:object="${post}">
+		<header>		
+			<h2 th:inline="text" > [[*{title}]] <span class="badge badge-secondary" >New</span> </h2>
+			<p> <small th:text="*{#calendars.format(postedOn, 'yyyy. MMMMM dd. HH:mm')}"> postedOn </small>  </p>
+		</header>
+		<section th:utext="*{teaser}">
+			teaser
+		</section>
+		<a th:href="@{/posts/view/} + *{slug}">Read More</a>
+		<br><br>
+
+		<footer class="blockquote-footer">
+			Posted By <a th:href="@{/authors/view/} + *{author.id}"> <span th:text="|*{author.firstName} *{author.lastName}|">author</span></a>
+		</footer>
+		
+		<hr/>
+	</blockquote>
+</body>
+

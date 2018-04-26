@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="hu"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{layouts/main}" th:with="currentPage='home'">
+
+<head>
+	<title>Géppark</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+		
+	<div layout:fragment="content">
+	
+		<ol class="breadcrumb">
+			<li><a href="/">Home</a></li>
+			<li class="active">Géppark</li>
+		</ol>
+	
+	    <div th:each="machine : ${machines}">
+	    	<article th:replace="fragments/machineFragment :: machine"> Place for a Virtual Machine </article>
+		</div>
+
+	</div>
+		
+</body>
+</html>
