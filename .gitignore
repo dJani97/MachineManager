@@ -1,0 +1,22 @@
+# Eclipse
+.classpath
+.project
+.tern-project
+.settings/
+build/
+bin/
+ 
+# Intellij
+.idea/
+*.iml
+*.iws
+ 
+# Mac
+.DS_Store
+ 
+# Maven
+log/
+target/
+
+# Dolphin File Manager
+.directory
