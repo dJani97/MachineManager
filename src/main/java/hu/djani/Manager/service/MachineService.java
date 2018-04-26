@@ -19,7 +19,15 @@ public class MachineService {
 		this.dao = machineDao;
 	}
 
-	public List<Machine> getMachineList() {
+	public List<Machine> getList() {
 		return this.dao.findAll();
+	}
+
+	public Machine getById(Integer id) {
+		return this.dao.getOne(id);
+	}
+
+	public void save(Machine machine) {
+		this.dao.save(machine);
 	}
 }

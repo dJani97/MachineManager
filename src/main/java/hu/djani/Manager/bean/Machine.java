@@ -14,6 +14,16 @@ import javax.persistence.Table;
 @Table(name = "t_machine")
 public class Machine {
 
+	public Machine() {
+	}
+
+	public Machine(String name, String description, String ip, Date creationDate) {
+		this.name = name;
+		this.description = description;
+		this.ip = ip;
+		this.creationDate = creationDate;
+	}
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN")
