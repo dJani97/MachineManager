@@ -7,10 +7,13 @@
 <body>
 
 	<div th:fragment="machine" class="panel panel-default" th:object="${machine}">
+	
+		<script th:src="@{/js/pinger.js}"></script>
+	
 		<div class="panel-heading" data-toggle="collapse" th:href="|#*{id}|">
 			<h4 class="panel-title">
 				<i class="fas fa-desktop"> <span th:text="*{name}">Machine Name</span></i>
-<!-- 				<span th:text="*{reachable}"></span> -->
+				<div th:data-address="*{address}" class="pingable loader"></div>
 	    	</h4>
 		</div>
 		
@@ -23,17 +26,22 @@
 				</p>
 								
 				<p>
-					name:
+					név:
 					<span th:text="*{name}"></span>
 				</p>
 								
 				<p>
-					desc:
+					leírás:
 					<span th:text="*{description}"></span>
+				</p>
+				
+				<p>
+					cím:
+					<span th:text="*{address}"></span>
 				</p>
 								
 				<p>
-					date:
+					létrehozva:
 					<span th:text="*{creationDate}"></span>
 				</p>
 

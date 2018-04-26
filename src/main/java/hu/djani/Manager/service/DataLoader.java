@@ -26,6 +26,11 @@ public class DataLoader {
 		this.machineService.save(new Machine("OpenLAB", "OpenLAB huedu szerver", "10.11.16.190", new Date()));
 
 		this.machineService.save(new Machine("Google DNS", "Google DNS szerver", "8.8.8.8", new Date()));
+		this.machineService.save(new Machine("Google Search", "a Google kereső weboldala", "www.google.com", new Date()));
+
+		this.machineService.save(new Machine("Facebook", "Facebook közösségi oldal", "www.facebook.com", new Date()));
+
+		this.machineService.save(new Machine("Localhost", "Saját gép", "127.0.0.1", new Date()));
 	}
 
 }
