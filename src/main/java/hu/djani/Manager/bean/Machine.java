@@ -88,29 +88,13 @@ public class Machine {
 		this.creationDate = creationDate;
 	}
 
+
 	//	public boolean getReachable() {
-	//		boolean reachable = false;
+	//		return this.getPinger(null).isReachable(this.getAddress());
+	//	}
 	//
-	//		try {
-	//			reachable = InetAddress.getByName(this.getAddress()).isReachable(10);
-	//		} catch (UnknownHostException e) {
-	//			e.printStackTrace();
-	//		} catch (IOException e) {
-	//			e.printStackTrace();
-	//		}
-	//
-	//		//			Process p1;
-	//		//			try {
-	//		//				p1 = java.lang.Runtime.getRuntime().exec("ping -n 1 -w 50 " + this.getIp());
-	//		//				int returnVal = p1.waitFor();
-	//		//				System.out.println(returnVal);
-	//		//				reachable = (returnVal==0);
-	//		//			} catch (Exception e) {
-	//		//				e.printStackTrace();
-	//		//			}
-	//
-	//		return reachable;
-	//
-	//
+	//	@Autowired
+	//	private PingComponent getPinger(PingComponent pinger) {
+	//		return pinger;
 	//	}
 }
