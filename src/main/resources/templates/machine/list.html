@@ -20,8 +20,10 @@
 	    <div th:each="machine : ${machines}">
 	    	<article th:replace="fragments/machineFragment :: machine"> Place for a Virtual Machine </article>
 		</div>
+		
+		<script th:src="@{/js/pinger.js}"></script>
 
 	</div>
-		
+	
 </body>
 </html>

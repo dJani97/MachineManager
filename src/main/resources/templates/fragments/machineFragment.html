@@ -8,12 +8,13 @@
 
 	<div th:fragment="machine" class="panel panel-default" th:object="${machine}">
 	
-		<script th:src="@{/js/pinger.js}"></script>
-	
 		<div class="panel-heading" data-toggle="collapse" th:href="|#*{id}|">
 			<h4 class="panel-title">
 				<i class="fas fa-desktop"> <span th:text="*{name}">Machine Name</span></i>
 				<div th:data-address="*{address}" class="pingable loader"></div>
+				<a href="/machine/view/*{id}" class="btn btn-primary" role="button">Primary link</a>
+				<button type="button" class="btn btn-primary">Primary</button>
+				<div class="clearfix"></div>
 	    	</h4>
 		</div>
 		
@@ -21,53 +22,32 @@
 			<div class="panel-body">
 				
 				<p>
-					id:
+					<strong>id:</strong>
 					<span th:text="*{id}"></span>
 				</p>
 								
 				<p>
-					név:
+					<strong>név:</strong>
 					<span th:text="*{name}"></span>
 				</p>
 								
 				<p>
-					leírás:
+					<strong>leírás:</strong>
 					<span th:text="*{description}"></span>
 				</p>
 				
 				<p>
-					cím:
+					<strong>cím:</strong>
 					<span th:text="*{address}"></span>
 				</p>
 								
 				<p>
-					létrehozva:
-					<span th:text="*{creationDate}"></span>
+					l<strong>étrehozva:</strong>
+					<span th:text="*{#calendars.format(creationDate, 'yyyy. MMMMM dd. HH:mm')}"></span>
 				</p>
 
 			</div>
 		</div>
 	</div>
-
-	
-
-
-	<blockquote class="blockquote" th:fragment="post" th:object="${post}">
-		<header>		
-			<h2 th:inline="text" > [[*{title}]] <span class="badge badge-secondary" >New</span> </h2>
-			<p> <small th:text="*{#calendars.format(postedOn, 'yyyy. MMMMM dd. HH:mm')}"> postedOn </small>  </p>
-		</header>
-		<section th:utext="*{teaser}">
-			teaser
-		</section>
-		<a th:href="@{/posts/view/} + *{slug}">Read More</a>
-		<br><br>
-
-		<footer class="blockquote-footer">
-			Posted By <a th:href="@{/authors/view/} + *{author.id}"> <span th:text="|*{author.firstName} *{author.lastName}|">author</span></a>
-		</footer>
-		
-		<hr/>
-	</blockquote>
 </body>
 
