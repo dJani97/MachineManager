@@ -12,7 +12,15 @@
 	
 	<div layout:fragment="content">
 		
+		<div th:if="${raisePermissionAlert} == true">
+			<div class="alert alert-danger alert-dismissible fade in">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Figyelmeztetés:</strong> Az alkalmazás nem rendszergazdaként fut, a ping teszt hibás eredményt mutathat.
+			</div>
+		</div>
+		
 		<h2>Kezdőlap</h2>
+		
 		<div class="row">
 			<div class="col-md-12">
  				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisl libero, molestie vitae orci nec, luctus feugiat lorem. Maecenas eu massa non neque blandit tempor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse id consectetur enim, et cursus nisl. Ut volutpat tempor accumsan. Aliquam et libero id nunc consectetur consequat at eu nibh. Nam ut justo in sapien fermentum facilisis.</p>
