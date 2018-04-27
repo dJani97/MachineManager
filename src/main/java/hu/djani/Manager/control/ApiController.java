@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.djani.Manager.bean.Machine;
+import hu.djani.Manager.component.PingComponent;
 import hu.djani.Manager.service.MachineService;
 
 @RestController
@@ -19,6 +20,9 @@ public class ApiController {
 
 	@Autowired
 	MachineService machineService;
+
+	@Autowired
+	PingComponent pingComponent;
 
 	@RequestMapping("/all")
 	public ResponseEntity<List<Machine>> listAllMachines(Model model) {
@@ -37,4 +41,8 @@ public class ApiController {
 		return ResponseEntity.accepted().build();
 	}
 
+	@RequestMapping("/ping/{address}")
+	public ResponseEntity<Boolean> isReachable(@PathVariable(required = true) String address) {
+		return ResponseEntity.ok(this.pingComponent.isReachable(address, 1500));
+	}
 }
