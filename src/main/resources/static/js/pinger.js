@@ -30,13 +30,23 @@ function ping(ip, callback) {
     }
 };
 
+function ajax_ping(ip, callback){
+	$.get("/api/ping/" + ip, response => {
+		if (response == true) {
+			callback('responded')			
+		} else {
+			callback('timeout')
+		}
+	});
+}
+
 window.onload = function() {
 	const pingables = $('.pingable')
 
 	pingables.each(function(index) {
 	    const address = $(this).attr('data-address')
 	    
-	    new ping(address, (response, e) => {
+	    new ajax_ping(address, (response, e) => {
 	        console.log(response)
 	        
 	        $(this).removeClass('loader')
