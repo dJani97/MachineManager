@@ -40,14 +40,15 @@ function ajax_ping(ip, callback) {
 	});
 };
 
-function updateAllIcons {
+function updateAllIcons() {
 	const pingables = $('.pingable')
 
 	pingables.each(function(index) {
-		$(this).removeClass('responded')
-		$(this).removeClass('timeout')
-		$(this).addClass('loader')
-		
+		if($(this).hasClass('timeout')) {
+			$(this).removeClass('timeout')
+			$(this).addClass('loader')
+		}
+				
 	    const address = $(this).attr('data-address')
 	    
 	    new ajax_ping(address, (response, e) => {
@@ -65,5 +66,6 @@ function updateAllIcons {
 
 
 window.onload = function() {
-	setInterval(updateAllIcons() , 2000);
+	updateAllIcons();
+	setInterval(updateAllIcons, 30000);
 };
