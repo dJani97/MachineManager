@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import hu.djani.Manager.bean.Machine;
+import hu.djani.Manager.service.MachineGroupService;
 import hu.djani.Manager.service.MachineService;
 
 @Controller
@@ -20,10 +21,12 @@ public class MachineController {
 
 	@Autowired
 	MachineService machineService;
+	@Autowired
+	MachineGroupService groupService;
 
 	@RequestMapping({"/list", ""})
 	public String listMachines(Model model) {
-		model.addAttribute("machines", this.machineService.getList());
+		model.addAttribute("groups", this.groupService.getList());
 		return "machine/list";
 	}
 
@@ -44,23 +47,6 @@ public class MachineController {
 		model.addAttribute("machine", this.machineService.getById(id));
 		return "machine/edit";
 	}
-
-	//	@PostMapping("/edit")
-	//	public String editMachinePost(Model model, @ModelAttribute Machine machine) {
-	//		System.out.println("Machine posted:");
-	//		System.out.println(machine);
-	//		model.addAttribute("machine", machine);
-	//		return "machine/edit";
-	//	}
-
-	//	@RequestMapping(value="/edit", method=RequestMethod.POST)
-	//	public String editMachinePost(@Valid Machine machine, BindingResult bindingResult) {
-	//		System.out.println("Machine posted:\n" + machine);
-	//		if(bindingResult.hasErrors()) {
-	//			return "machine/edit";
-	//		}
-	//		return "machine/view";
-	//	}
 
 	@PostMapping("/edit")
 	public String editMachinePost(Model model, @Valid Machine machine, BindingResult bindingResult) {

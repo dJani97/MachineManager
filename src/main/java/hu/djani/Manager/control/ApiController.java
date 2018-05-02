@@ -24,20 +24,24 @@ public class ApiController {
 	@Autowired
 	PingComponent pingComponent;
 
-	@RequestMapping("/all")
+	@RequestMapping("/machine/all")
 	public ResponseEntity<List<Machine>> listAllMachines(Model model) {
 
 		return ResponseEntity.ok(this.machineService.getList());
 	}
 
-	@RequestMapping("/{id}")
+	/*
+	 * machine services
+	 */
+
+	@RequestMapping("/machine/{id}")
 	public ResponseEntity<Machine> getMachineById(@PathVariable(required = true) Integer id) {
 		return ResponseEntity.ok(this.machineService.getById(id));
 	}
 
-	@RequestMapping("/addDummy")
+	@RequestMapping("/machine/addDummy")
 	public ResponseEntity<Void> getMachineById() {
-		this.machineService.save(new Machine("dummy", "dummy leiras", "10.11.16.69", new Date()));
+		this.machineService.save(new Machine("dummy", "dummy leiras", "10.11.16.69", new Date(), null));
 		return ResponseEntity.accepted().build();
 	}
 
@@ -46,4 +50,5 @@ public class ApiController {
 		//		System.out.println("ping called with: " + address);
 		return ResponseEntity.ok(this.pingComponent.isReachable(address, 1500));
 	}
+
 }

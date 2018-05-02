@@ -16,10 +16,18 @@
 			<li><a href="/">Home</a></li>
 			<li class="active">Géppark</li>
 		</ol>
-	
-	    <div th:each="machine : ${machines}">
-	    	<div th:replace="fragments/machineFragment :: machine"> Place for a Virtual Machine </div>
+		
+		<div th:each="group : ${groups}">
+		
+			<h3 th:text="${group.name}"></h3>
+		
+			<div th:each="machine : ${group.machines}">
+	    		<div th:replace="fragments/machineFragment :: machine"> Place for a Virtual Machine </div>
+			</div>
+		
 		</div>
+	
+	    
 		
 		<script th:src="@{/js/pinger.js}"></script>
 

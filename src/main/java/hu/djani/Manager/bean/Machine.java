@@ -23,11 +23,12 @@ public class Machine {
 		this.creationDate = new Date();
 	}
 
-	public Machine(String name, String description, String address, Date creationDate) {
+	public Machine(String name, String description, String address, Date creationDate, MachineGroup group) {
 		this.name = name;
 		this.description = description;
 		this.address = address;
 		this.creationDate = creationDate;
+		this.group = group;
 	}
 
 	@Id
@@ -110,13 +111,12 @@ public class Machine {
 		this.creationDate = creationDate;
 	}
 
+	public MachineGroup getGroup() {
+		return this.group;
+	}
 
-	//	public boolean getReachable() {
-	//		return this.getPinger(null).isReachable(this.getAddress());
-	//	}
-	//
-	//	@Autowired
-	//	private PingComponent getPinger(PingComponent pinger) {
-	//		return pinger;
-	//	}
+	public void setGroup(MachineGroup group) {
+		this.group = group;
+	}
+
 }
