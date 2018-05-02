@@ -16,7 +16,6 @@ public class OsInfoComponent {
 	}
 
 	public boolean isRunningAsAdmin() {
-		System.getProperties().list(System.out);
 		if (OS_UNIX == this.getOsName()) {
 			String user_name = System.getProperty("user.name");
 			if ("root".equals(user_name)) {
@@ -24,7 +23,6 @@ public class OsInfoComponent {
 			}
 		} else if (OS_WINDOWS == this.getOsName()) {
 			String user_name = System.getProperty("user.name");
-			System.out.println("__ USERNAME__:" + user_name);
 			if ("admin".equals(user_name)) {
 				return true;
 			}

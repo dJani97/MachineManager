@@ -37,13 +37,13 @@ public class ApiController {
 
 	@RequestMapping("/addDummy")
 	public ResponseEntity<Void> getMachineById() {
-		machineService.save(new Machine("dummy", "dummy leiras", "10.11.16.69", new Date()));
+		this.machineService.save(new Machine("dummy", "dummy leiras", "10.11.16.69", new Date()));
 		return ResponseEntity.accepted().build();
 	}
 
 	@RequestMapping("/ping/{address}")
 	public ResponseEntity<Boolean> isReachable(@PathVariable(required = true) String address) {
-		System.out.println("ping called with: " + address);
+		//		System.out.println("ping called with: " + address);
 		return ResponseEntity.ok(this.pingComponent.isReachable(address, 1500));
 	}
 }

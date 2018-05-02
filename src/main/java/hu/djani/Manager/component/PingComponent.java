@@ -1,6 +1,7 @@
 package hu.djani.Manager.component;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,8 @@ public class PingComponent {
 
 		try {
 			reachable = InetAddress.getByName(targetAddress).isReachable(timeout);
+		} catch (UnknownHostException e) {
+			return false;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
