@@ -38,30 +38,37 @@ public class MachineController {
 
 	@GetMapping("/new")
 	public String newMachineGet(Model model) {
+		model.addAttribute("groups", this.groupService.getList());
 		model.addAttribute("machine", new Machine());
+
 		return "machine/edit";
 	}
 
 	@GetMapping("/edit/{id}")
 	public String editMachineGet(Model model, @PathVariable Integer id) {
+		model.addAttribute("groups", this.groupService.getList());
 		model.addAttribute("machine", this.machineService.getById(id));
+
 		return "machine/edit";
 	}
 
 	@PostMapping("/edit")
-	public String editMachinePost(Model model, @Valid Machine machine, BindingResult bindingResult) {
-		System.out.println("Machine posted:\n" + machine);
+	public String editMachinePost(Model model, @Valid Machine machine, BindingResult bindingResult, Integer groupId) {
+		model.addAttribute("groups", this.groupService.getList());
+		System.out.println("Machine posted:\n" + machine + "\nGroup ID: " + groupId);
+		if (groupId != null) {
+			machine.setGroup(this.groupService.getById(groupId));
+		}
+
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("success", false);
 			return "machine/edit";
 		}
+
 		this.machineService.save(machine);
+		model.addAttribute("machine", machine);
 		model.addAttribute("success", true);
 
-
-		System.out.println("Machine posted:\n" + machine);
-
-		model.addAttribute("machine", machine);
 		return "machine/edit";
 	}
 }

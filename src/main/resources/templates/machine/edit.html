@@ -78,9 +78,23 @@
 					<p type="text" name="creationDate" class="form-control-static" th:text="*{#calendars.format(creationDate, 'yyyy. MMMMM dd. HH:mm')}"></p>
 				</div>
 			</div>
-
-
-			<button type="submit" formmethod="post" class="btn btn-primary">Mentés</button>
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="groups">Gép csoportok:</label>
+				<div class="col-sm-8">
+					<select id="groups" name="groupId" class="form-control">
+						<optgroup th:label="|projekt helye|">
+				    	<option th:each="group : ${groups}" th:text="${group.name}" th:value="${group.id}"
+				    			th:selected="${group} eq *{group}">Group Name</option>
+				    	</optgroup>
+				    </select>
+				</div>
+				
+			</div>
+			
+			<div class="form-group text-center">
+				<button type="submit" formmethod="post" class="btn btn-primary">Mentés</button>
+			</div>
 
 		</form>
 
