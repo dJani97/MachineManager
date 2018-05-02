@@ -9,12 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 @Table(name = "t_machine")
 public class Machine {
 
 	public Machine() {
+		this.creationDate = new Date();
 	}
 
 	public Machine(String name, String description, String address, Date creationDate) {
@@ -30,15 +35,22 @@ public class Machine {
 	@SequenceGenerator(name = "SEQ_GEN", sequenceName = "s_book", allocationSize = 1, initialValue = 1)
 	private Integer id;
 
+	@NotNull
+	@Size(min=2, max=200)
 	@Column(name = "name")
 	private String name;
 
+	@NotNull
+	@Size(min=2, max=5000)
 	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
 
+	@NotNull
+	@Size(min=7, max=200)
 	@Column(name = "address")
 	private String address;
 
+	@CreatedDate
 	@Column(name = "creation_date", columnDefinition = "TIMESTAMP")
 	private Date creationDate;
 

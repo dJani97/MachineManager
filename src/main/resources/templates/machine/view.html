@@ -14,10 +14,11 @@
 	
 		<ol class="breadcrumb">
 			<li><a href="/">Home</a></li>
-			<li class="active">Géppark</li>
+			<li><a href="/machine/list">Géppark</a></li>
+			<li>Gép Megtekintése</li>
 		</ol>
 	
-	    <div th:each="machine : ${machines}">
+	    <div>
 	    	<div th:replace="fragments/machineFragment :: machine"> Place for a Virtual Machine </div>
 		</div>
 		

@@ -30,6 +30,8 @@ public class DataLoader {
 		this.machineService.save(new Machine("Google DNS", "Google DNS szerver", "8.8.8.8", new Date()));
 		this.machineService.save(new Machine("Google Search", "a Google kereső", "www.google.com", new Date()));
 		this.machineService.save(new Machine("Facebook", "Facebook közösségi oldal", "www.facebook.com", new Date()));
+
+		this.machineService.save(new Machine("Eszméletlenül hosszú cím ami már valószínűleg ki fog lógni elég rendesen", "Eszméletlenül hosszú leírás ami már valószínűleg ki fog lógni elég rendesen, de ez még nem volt elég neki ezért még sokkal hosszabbra kell írni hogy egészen biztosan elérjen ennek a sornak a végéig. És akkor most megoldom hogy túllógjon.", "10.11.16.189", new Date()));
 	}
 
 }
