@@ -14,11 +14,6 @@ public class MachineService {
 	@Autowired
 	MachineDao dao;
 
-	@Autowired
-	public MachineService(MachineDao machineDao) {
-		this.dao = machineDao;
-	}
-
 	public List<Machine> getList() {
 		return this.dao.findAll();
 	}

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -31,8 +32,8 @@ public class Machine {
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN")
-	@SequenceGenerator(name = "SEQ_GEN", sequenceName = "s_book", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_M")
+	@SequenceGenerator(name = "SEQ_GEN_M", sequenceName = "s_machine", allocationSize = 1, initialValue = 1)
 	private Integer id;
 
 	@NotNull
@@ -53,6 +54,15 @@ public class Machine {
 	@CreatedDate
 	@Column(name = "creation_date", columnDefinition = "TIMESTAMP")
 	private Date creationDate;
+
+
+	/*
+	 * relationships
+	 */
+
+	@ManyToOne
+	private MachineGroup group;
+
 
 	@Override
 	public String toString() {
