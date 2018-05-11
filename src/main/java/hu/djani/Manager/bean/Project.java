@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -18,23 +17,22 @@ import javax.validation.constraints.Size;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
-@Table(name = "t_machine_group")
-public class MachineGroup {
+@Table(name = "t_project")
+public class Project {
 
-	public MachineGroup() {
+	public Project() {
 		this.creationDate = new Date();
 	}
 
-	public MachineGroup(@NotNull @Size(min = 2, max = 200) String name, Project project) {
+	public Project(@NotNull @Size(min = 2, max = 200) String name) {
 		this.name = name;
-		this.project = project;
 		this.creationDate = new Date();
 	}
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_MG")
-	@SequenceGenerator(name = "SEQ_GEN_MG", sequenceName = "s_machine_group", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_MP")
+	@SequenceGenerator(name = "SEQ_GEN_MP", sequenceName = "s_project", allocationSize = 1, initialValue = 1)
 	private Integer id;
 
 	@NotNull
@@ -50,11 +48,12 @@ public class MachineGroup {
 	 * relationships
 	 */
 
-	@OneToMany(mappedBy = "group")
-	private List<Machine> machines;
+	@OneToMany(mappedBy = "project")
+	private List<MachineGroup> groups;
 
-	@ManyToOne
-	private Project project;
+	/*
+	 * GET-SET
+	 */
 
 	public Integer getId() {
 		return id;
@@ -80,20 +79,12 @@ public class MachineGroup {
 		this.creationDate = creationDate;
 	}
 
-	public List<Machine> getMachines() {
-		return machines;
+	public List<MachineGroup> getGroups() {
+		return groups;
 	}
 
-	public void setMachines(List<Machine> machines) {
-		this.machines = machines;
-	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
+	public void setGroups(List<MachineGroup> groups) {
+		this.groups = groups;
 	}
 
 }

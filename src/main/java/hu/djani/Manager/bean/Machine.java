@@ -38,24 +38,23 @@ public class Machine {
 	private Integer id;
 
 	@NotNull
-	@Size(min=2, max=200)
+	@Size(min = 2, max = 200)
 	@Column(name = "name")
 	private String name;
 
 	@NotNull
-	@Size(min=2, max=5000)
+	@Size(min = 2, max = 5000)
 	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
 
 	@NotNull
-	@Size(min=7, max=200)
+	@Size(min = 7, max = 200)
 	@Column(name = "address")
 	private String address;
 
 	@CreatedDate
 	@Column(name = "creation_date", columnDefinition = "TIMESTAMP")
 	private Date creationDate;
-
 
 	/*
 	 * relationships
@@ -64,11 +63,10 @@ public class Machine {
 	@ManyToOne
 	private MachineGroup group;
 
-
 	@Override
 	public String toString() {
-		return "Machine [id=" + this.id + ", name=" + this.name + ", description=" + this.description + ", ip=" + this.address
-				+ ", creationDate=" + this.creationDate + "]";
+		return "Machine [id=" + this.id + ", name=" + this.name + ", description=" + this.description + ", ip="
+				+ this.address + ", creationDate=" + this.creationDate + "]";
 	}
 
 	public Integer getId() {
