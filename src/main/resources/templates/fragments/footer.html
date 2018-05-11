@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="hu"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="hu" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="utf-8" />
 </head>
+
 <body>
 	<footer th:fragment="footer" th:align="center">
-		<p class="small text-muted">Dobszai János &copy <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}">2018</span></p>
+		<p class="small text-muted">Dobszai János &copy
+			<span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}">2018</span>
+		</p>
 	</footer>
 </body>
-
