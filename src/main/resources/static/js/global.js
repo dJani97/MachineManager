@@ -1,7 +1,6 @@
 
 function redirectTo(url) {
 	if (location != url) {
-
 		location = url;
 	}
 	console.log(location)

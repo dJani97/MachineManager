@@ -1,30 +1,34 @@
 <!DOCTYPE html>
-<html lang="hu"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	layout:decorate="~{layouts/main}" th:with="currentPage='machine'">
+<html lang="hu" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layouts/main}"
+ th:with="currentPage='machine'">
 
 <head>
 	<title>Géppark</title>
 	<meta charset="utf-8" />
 </head>
+
 <body>
-		
+
 	<div layout:fragment="content">
-	
+
 		<ol class="breadcrumb">
-			<li><a href="/">Home</a></li>
-			<li><a href="/machine/list">Géppark</a></li>
+			<li>
+				<a href="/">Home</a>
+			</li>
+			<li>
+				<a href="/machine/list">Géppark</a>
+			</li>
 			<li>Gép Megtekintése</li>
 		</ol>
-	
-	    <div>
-	    	<div th:replace="fragments/machineFragment :: machine"> Place for a Virtual Machine </div>
+
+		<div>
+			<div th:replace="fragments/machineFragment :: machine"> Place for a Virtual Machine </div>
 		</div>
-		
+
 		<script th:src="@{/js/pinger.js}"></script>
 
 	</div>
-	
+
 </body>
+
 </html>

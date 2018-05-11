@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="utf-8" />
+  <meta charset="utf-8" />
 </head>
+
 <body>
 
   <div th:fragment="machine" class="panel panel-default" th:object="${machine}">
@@ -22,28 +24,33 @@
       <div class="panel-body">
 
         <a th:href="@{/machine/edit/} + *{id}" class="btn btn-default btn-sm pull-right" role="button">
-        <i class="glyphicon glyphicon-edit"></i>
-        	adatlap megnyitása
+          <i class="glyphicon glyphicon-edit"></i>
+          adatlap megnyitása
         </a>
 
         <p>
-          <strong>id:</strong> <span th:text="*{id}"></span>
+          <strong>id:</strong>
+          <span th:text="*{id}"></span>
         </p>
 
         <p>
-          <strong>név:</strong> <span th:text="*{name}"></span>
+          <strong>név:</strong>
+          <span th:text="*{name}"></span>
         </p>
 
         <p>
-          <strong>leírás:</strong> <span th:text="*{description}"></span>
+          <strong>leírás:</strong>
+          <span th:text="*{description}"></span>
         </p>
 
         <p>
-          <strong>cím:</strong> <span th:text="*{address}"></span>
+          <strong>cím:</strong>
+          <span th:text="*{address}"></span>
         </p>
 
         <p>
-          <strong>létrehozva:</strong> <span th:text="*{#calendars.format(creationDate, 'yyyy. MMMMM dd. HH:mm')}"></span>
+          <strong>létrehozva:</strong>
+          <span th:text="*{#calendars.format(creationDate, 'yyyy. MMMMM dd. HH:mm')}"></span>
         </p>
 
       </div>
