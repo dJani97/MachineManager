@@ -7,13 +7,16 @@ function redirectTo(url) {
 }
 
 
-function docKeyUpHandler(e) {
+function keyUpHandler(e) {
 	if (e.altKey && e.keyCode == 65) {
 		redirectTo("/machine/new");
 	}
 	else if (e.altKey && e.keyCode == 72) {
 		redirectTo("/home");
 	}
+	else if (e.altKey && e.keyCode == 76) {
+		redirectTo("/machine/list");
+	}
 }
 
-document.addEventListener('keyup', docKeyUpHandler, false);
+document.addEventListener('keyup', keyUpHandler, false);

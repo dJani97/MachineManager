@@ -66,8 +66,6 @@ public class DataLoader {
 		 * Saving MachineGroups
 		 */
 
-		System.out.println("\n\n JÁÁÁÁÁJ \n\n");
-
 		this.groupService.save(groupOes);
 		this.groupService.save(groupIPrint);
 
