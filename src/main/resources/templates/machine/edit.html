@@ -83,8 +83,8 @@
 				<label class="control-label col-sm-2" for="groups">Gép csoportok:</label>
 				<div class="col-sm-8">
 					<select id="groups" name="groupId" class="form-control">
-						<optgroup th:label="|projekt helye|">
-				    	<option th:each="group : ${groups}" th:text="${group.name}" th:value="${group.id}"
+						<optgroup th:each="project : ${projects}" th:label="${project.name}">
+				    	<option th:each="group : ${project.groups}" th:text="${group.name}" th:value="${group.id}"
 				    			th:selected="${group} eq *{group}">Group Name</option>
 				    	</optgroup>
 				    </select>
