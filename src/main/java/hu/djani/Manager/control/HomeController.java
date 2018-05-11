@@ -13,7 +13,7 @@ public class HomeController {
 	@Autowired
 	OsInfoComponent info;
 
-	@RequestMapping("/")
+	@RequestMapping({ "/", "/home" })
 	public String home(Model model) {
 		model.addAttribute("raisePermissionAlert", !info.isRunningAsAdmin());
 		return "index";

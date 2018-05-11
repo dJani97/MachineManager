@@ -1,39 +1,41 @@
 <!DOCTYPE html>
-<html lang="hu"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="hu" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="utf-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<link rel="stylesheet" href="../static/css/main.css" th:href="@{/css/main.css}"/>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="../static/css/main.css" th:href="@{/css/main.css}" />
 
 	<!-- Bootstrap 3.3.7 -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-	
+
 	<!-- Query -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
 </head>
+
 <body>
 
 	<div class="container">
-	
+
 		<nav th:replace="fragments/header :: header">Navigation bar</nav>
-		
+
 		<div class="container-fluid">
 			<div layout:fragment="content">Page content</div>
 		</div>
-		
+
 		<footer th:replace="fragments/footer :: footer">Footer</footer>
-		
+
 	</div>
-	
+
 	<!-- Bootstrap 3.3.7 JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+	<!-- global JS -->
+	<script th:src="@{/js/global.js}"></script>
+
 </body>
+
 </html>
