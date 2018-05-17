@@ -1,0 +1,49 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/machine
+    username: machine
+    password: Password111
+    driver-class-name: org.postgresql.Driver
+    platform: postgres
+
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          # Meant to hide "Disabling contextual LOB creation as createClob() method threw error" 
+          # more details: http://vkuzel.blogspot.hu/2016/03/spring-boot-jpa-hibernate-atomikos.html
+#          use_jdbc_metadata_defaults: false
+          
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    
+
+
+
+#logging:
+#  level:
+#    org.springframework.security: 
+#    org.hibernate: DEBUG
+
+#logging:
+#   level: 
+      # Hides HHH000424: Disabling contextual LOB creation as createClob() method threw error 
+#      org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl: WARN
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
