@@ -7,17 +7,18 @@ spring:
     platform: postgres
 
   jpa:
-    properties:
-      hibernate:
-        temp:
-          # Meant to hide "Disabling contextual LOB creation as createClob() method threw error" 
-          # more details: http://vkuzel.blogspot.hu/2016/03/spring-boot-jpa-hibernate-atomikos.html
-#          use_jdbc_metadata_defaults: false
-          
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     hibernate:
       ddl-auto: update
+#    properties:
+#      hibernate:
+#        temp:
+##           Meant to hide "Disabling contextual LOB creation as createClob() method threw error" 
+##           more details: http://vkuzel.blogspot.hu/2016/03/spring-boot-jpa-hibernate-atomikos.html
+#          use_jdbc_metadata_defaults: false
+          
+
     
 
 

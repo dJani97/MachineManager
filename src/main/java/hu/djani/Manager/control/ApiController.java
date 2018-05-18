@@ -47,8 +47,8 @@ public class ApiController {
 
 	@RequestMapping("/ping/{address}")
 	public ResponseEntity<Boolean> isReachable(@PathVariable(required = true) String address) {
-		//		System.out.println("ping called with: " + address);
-		return ResponseEntity.ok(this.pingComponent.isReachable(address, 1500));
+		// System.out.println("ping called with: " + address);
+		return ResponseEntity.ok(this.pingComponent.isReachable(address, 100));
 	}
 
 }

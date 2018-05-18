@@ -2,7 +2,7 @@
 <html lang="hu"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">>
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
 	<meta charset="utf-8" />
@@ -24,13 +24,13 @@
 
 	<div class="container">
 
-		<nav th:replace="fragments/header :: header">Navigation bar</nav>
+		<nav th:replace="layout/fragment/header :: header">Navigation bar</nav>
 
 		<div class="container-fluid">
 			<div layout:fragment="content">Page content</div>
 		</div>
 
-		<footer th:replace="fragments/footer :: footer">Footer</footer>
+		<footer th:replace="layout/fragment/footer :: footer">Footer</footer>
 
 	</div>
 

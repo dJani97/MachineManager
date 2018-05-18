@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml" layout:decorate="~{layout/main}"
+	th:with="currentPage='machine'">
+
+<head>
+<meta charset="utf-8" />
+</head>
+
+<body>
+  <div th:fragment="project" th:object="${project}">
+
+      <div class="row">
+        <h2 th:text="${project.name}">Project Name</h2>
+
+        <div th:each="group : ${project.groups}">
+          <div th:replace="machine/fragment/groupFragment :: group">Machine Group</div>
+        </div>
+
+      </div>
+
+  </div>
+</body>

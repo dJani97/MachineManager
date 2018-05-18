@@ -27,6 +27,12 @@ public class DataLoader {
 	}
 
 	@PostConstruct
+	public void checkDatabase() {
+		if (machineService.getList().isEmpty()) {
+			this.loadData();
+		}
+	}
+
 	public void loadData() {
 		// @formatter:off
 
