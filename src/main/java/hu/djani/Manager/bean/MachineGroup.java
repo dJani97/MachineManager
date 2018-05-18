@@ -17,6 +17,9 @@ import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.CreatedDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "t_machine_group")
 public class MachineGroup {
@@ -51,13 +54,15 @@ public class MachineGroup {
 	 */
 
 	@OneToMany(mappedBy = "group")
+	@JsonManagedReference
 	private List<Machine> machines;
 
 	@ManyToOne
+	@JsonBackReference
 	private Project project;
 
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Integer id) {
@@ -65,7 +70,7 @@ public class MachineGroup {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -73,7 +78,7 @@ public class MachineGroup {
 	}
 
 	public Date getCreationDate() {
-		return creationDate;
+		return this.creationDate;
 	}
 
 	public void setCreationDate(Date creationDate) {
@@ -81,7 +86,7 @@ public class MachineGroup {
 	}
 
 	public List<Machine> getMachines() {
-		return machines;
+		return this.machines;
 	}
 
 	public void setMachines(List<Machine> machines) {
@@ -89,7 +94,7 @@ public class MachineGroup {
 	}
 
 	public Project getProject() {
-		return project;
+		return this.project;
 	}
 
 	public void setProject(Project project) {

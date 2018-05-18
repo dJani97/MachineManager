@@ -15,6 +15,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.CreatedDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "t_machine")
 public class Machine {
@@ -61,6 +63,7 @@ public class Machine {
 	 */
 
 	@ManyToOne
+	@JsonBackReference
 	private MachineGroup group;
 
 	@Override

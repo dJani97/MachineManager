@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.djani.Manager.bean.Machine;
+import hu.djani.Manager.bean.Project;
 import hu.djani.Manager.component.PingComponent;
 import hu.djani.Manager.service.MachineService;
+import hu.djani.Manager.service.ProjectService;
 
 @RestController
 @RequestMapping("/api/")
@@ -22,12 +24,21 @@ public class ApiController {
 	MachineService machineService;
 
 	@Autowired
+	ProjectService projectService;
+
+	@Autowired
 	PingComponent pingComponent;
 
-	@RequestMapping("/machine/all")
+	@RequestMapping("/machines")
 	public ResponseEntity<List<Machine>> listAllMachines(Model model) {
 
 		return ResponseEntity.ok(this.machineService.getList());
+	}
+
+	@RequestMapping("/projects")
+	public ResponseEntity<List<Project>> listAllProjects(Model model) {
+
+		return ResponseEntity.ok(this.projectService.getList());
 	}
 
 	/*
