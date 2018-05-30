@@ -58,7 +58,7 @@ public class DataLoader {
 
 		if (adminRole == null) {
 			adminRole = new UserRole();
-			adminRole.setId(0L);
+			// adminRole.setId(0L);
 			adminRole.setAuthority(UserRoleService.ADMIN_ROLE);
 			this.roleService.save(adminRole);
 		}
