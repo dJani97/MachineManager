@@ -30,7 +30,7 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li><a href="/machine/list">Géppark</a></li>
-							<li><a href="/machine/new">+ Hozzáadás</a></li>
+							<li sec:authorize="isAuthenticated()"><a href="/machine/new">+ Hozzáadás</a></li>
 						</ul>
 					</li>
 					
@@ -47,7 +47,7 @@
 				
 				<div sec:authorize="isAnonymous()" class="navbar-text navbar-right">
 					<a href="#"><span class="glyphicon glyphicon-user"></span> Regisztráció</a>
-					&nbsp | &nbsp 
+					&nbsp | &nbsp
 			    	<a href="/login"><span class="glyphicon glyphicon-log-in"></span> Bejelentkezés</a>
 				</div>
 				
@@ -56,7 +56,9 @@
 				</div>
 								
 				<div sec:authorize="isAuthenticated()" class="navbar-text navbar-right">
-					Welcome <span sec:authentication="name">UserName</span>
+					<span sec:authentication="principal.fullname">UserName</span>
+					(<span sec:authentication="name">UserName</span>)
+					&nbsp |
 					<form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline"></form>
 				</div>	
 				

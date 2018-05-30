@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy;
 
@@ -18,7 +19,8 @@ public class MachineSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	// @formatter:off
  	private static final String[] AUTH_WHITELIST = {
-			"/hello/**",
+			"/",
+			"/machine/list"
 	};
 	// @formatter:on
 
@@ -33,16 +35,7 @@ public class MachineSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-		// erdekessegek / lehetosegek:
-		//
-		// auth.ldapAuthentication()
-		// auth.jdbcAuthentication()
-		auth.inMemoryAuthentication().withUser("asd").password("{noop}asd").roles("ADMIN").and().withUser("sdf")
-				.password("{noop}sdf").roles("USER");
-
-		// auth.userDetailsService(this.userService).passwordEncoder(new
-		// BCryptPasswordEncoder());
+		auth.userDetailsService(this.userService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	@Override

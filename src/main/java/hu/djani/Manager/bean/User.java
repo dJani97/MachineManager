@@ -16,12 +16,19 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 @Entity
 @Table(name = "t_user")
+@Data
+// @ToString(exclude = "roles")
+@EqualsAndHashCode(exclude = "roles")
 public class User implements UserDetails {
 	private static final long serialVersionUID = -1103629629429559376L;
 
@@ -49,74 +56,32 @@ public class User implements UserDetails {
 	@Column(name = "enabled", nullable = false)
 	private boolean enabled;
 
+	@Column(name = "firstname", length = 100, nullable = false)
+	@Size(min = 2, max = 100)
+	private String firstname;
+
+	@Column(name = "lastname", length = 100, nullable = false)
+	@Size(min = 2, max = 100)
+	private String lastname;
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "t_user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Set<UserRole> roles = new HashSet<>();
 
-	public Long getId() {
-		return this.id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Override
-	public String getUsername() {
-		return this.username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	@Override
-	public String getPassword() {
-		return this.password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return this.accountNonExpired;
-	}
-
-	public void setAccountNonExpired(boolean accountNonExpired) {
-		this.accountNonExpired = accountNonExpired;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return this.accountNonLocked;
-	}
-
-	public void setAccountNonLocked(boolean accountNonLocked) {
-		this.accountNonLocked = accountNonLocked;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return this.credentialsNonExpired;
-	}
-
-	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-		this.credentialsNonExpired = credentialsNonExpired;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return this.enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return Collections.unmodifiableCollection(this.roles);
+	}
+
+	public void addRole(UserRole role) {
+		this.roles.add(role);
+	}
+
+	public boolean hasRole(UserRole role) {
+		return this.roles.contains(role);
+	}
+
+	public String getFullname() {
+		return this.lastname + " " + this.firstname;
 	}
 }

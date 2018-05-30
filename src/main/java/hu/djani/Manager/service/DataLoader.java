@@ -1,15 +1,23 @@
 package hu.djani.Manager.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import hu.djani.Manager.bean.Machine;
 import hu.djani.Manager.bean.MachineGroup;
 import hu.djani.Manager.bean.Project;
+import hu.djani.Manager.bean.User;
+import hu.djani.Manager.bean.UserRole;
 
 @Service
 public class DataLoader {
@@ -17,20 +25,72 @@ public class DataLoader {
 	MachineService machineService;
 	MachineGroupService groupService;
 	ProjectService projectService;
+	UserService userService;
+	UserRoleService roleService;
+
+	// @Autowired
+	// UserDao userDao;
 
 	@Autowired
 	public DataLoader(MachineService machineService, MachineGroupService machineGroupService,
-			ProjectService projectService) {
+			ProjectService projectService, UserService userService, UserRoleService roleService)
+			throws InterruptedException {
 		this.machineService = machineService;
 		this.groupService = machineGroupService;
 		this.projectService = projectService;
+		this.userService = userService;
+		this.roleService = roleService;
+
+		Thread.sleep(5000);
 	}
 
 	@PostConstruct
 	public void checkDatabase() {
-		if (machineService.getList().isEmpty()) {
+
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+		if (this.machineService.getList().isEmpty()) {
 			this.loadData();
 		}
+
+		UserRole adminRole = null; // = this.roleService.getByName(UserRoleService.ADMIN_ROLE);
+
+		if (adminRole == null) {
+			adminRole = new UserRole();
+			adminRole.setId(0L);
+			adminRole.setAuthority(UserRoleService.ADMIN_ROLE);
+			this.roleService.save(adminRole);
+		}
+
+		User adminUser;
+		try {
+			adminUser = (User) this.userService.loadUserByUsername("root");
+		} catch (UsernameNotFoundException ex) {
+			adminUser = new User();
+			adminUser.setAccountNonExpired(true);
+			adminUser.setAccountNonLocked(true);
+			adminUser.setCredentialsNonExpired(true);
+			adminUser.setEnabled(true);
+			adminUser.setPassword(new BCryptPasswordEncoder().encode("root"));
+			adminUser.setUsername("root");
+			adminUser.setFirstname("János");
+			adminUser.setLastname("Dobszai");
+			this.userService.save(adminUser);
+		}
+
+		if (!adminUser.hasRole(adminRole)) {
+			adminUser.addRole(adminRole);
+			this.userService.save(adminUser);
+		}
+
+		adminUser = (User) this.userService.loadUserByUsername("root");
+
+		adminRole = this.roleService.getByName(UserRoleService.ADMIN_ROLE);
+
+		System.out.println("admin: " + adminUser);
+		System.out.println("role: " + adminRole);
+
 	}
 
 	public void loadData() {
@@ -49,9 +109,9 @@ public class DataLoader {
 		 * Saving Projects
 		 */
 
-		projectService.save(projectNoe);
-		projectService.save(projectHuedu);
-		projectService.save(projectTeszt);
+		this.projectService.save(projectNoe);
+		this.projectService.save(projectHuedu);
+		this.projectService.save(projectTeszt);
 
 		/*
 		 * Creating MachineGroups
