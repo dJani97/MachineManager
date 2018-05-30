@@ -52,6 +52,14 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!-- lombok -->
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 
 		<!-- Spring Data JPA -->
 
@@ -62,7 +70,7 @@
 
 
 		<!-- PostgreSQL database -->
-		
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>

@@ -5,11 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,8 +15,11 @@ import org.springframework.data.annotation.CreatedDate;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "t_project")
+@Data
 public class Project {
 
 	public Project() {
@@ -33,8 +33,9 @@ public class Project {
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_MP")
-	@SequenceGenerator(name = "SEQ_GEN_MP", sequenceName = "s_project", allocationSize = 1, initialValue = 1)
+	// @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN_MP")
+	// @SequenceGenerator(name = "SEQ_GEN_MP", sequenceName = "s_project",
+	// allocationSize = 1, initialValue = 1)
 	private Integer id;
 
 	@NotNull
@@ -53,41 +54,5 @@ public class Project {
 	@OneToMany(mappedBy = "project")
 	@JsonManagedReference
 	private List<MachineGroup> groups;
-
-	/*
-	 * GET-SET
-	 */
-
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Date getCreationDate() {
-		return this.creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public List<MachineGroup> getGroups() {
-		return this.groups;
-	}
-
-	public void setGroups(List<MachineGroup> groups) {
-		this.groups = groups;
-	}
 
 }
