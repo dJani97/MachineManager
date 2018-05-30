@@ -52,6 +52,18 @@
 			<scope>runtime</scope>
 		</dependency>
 
+
+		<!-- security -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+
+		
+
+
 		<!-- lombok -->
 
 		<dependency>
@@ -97,6 +109,18 @@
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
+		
+		<!-- thymeleaf security -->
+		
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+			<version>3.0.2.RELEASE</version>	<!--$NO-MVN-MAN-VER$-->
+		</dependency>
+		
+		
+		
+		
 	</dependencies>
 
 

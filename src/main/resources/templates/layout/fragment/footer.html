@@ -6,8 +6,8 @@
 </head>
 
 <body>
-	<footer th:fragment="footer" th:align="center">
-		<p class="small text-muted">Dobszai János &copy
+	<footer th:fragment="footer">
+		<p class="small text-muted text-center">Dobszai János &copy
 			<span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}">2018</span>
 		</p>
 	</footer>
