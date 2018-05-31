@@ -1,0 +1,44 @@
+package hu.djani.Manager.service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
+
+import hu.djani.Manager.bean.User;
+import hu.djani.Manager.control.AuthController;
+
+@Service
+public class NotificationService {
+
+	private Logger logger = LoggerFactory.getLogger(AuthController.class);
+
+	@Autowired
+	private JavaMailSender javaMailSender;
+
+	@Value("${spring.mail.username}")
+	private String senderEmail;
+
+	@Value("${server.address}")
+	private String serverAddress;
+
+	@Value("${server.port}")
+	private String serverPort;
+
+	public void sendAccountVerification(User user, String url, String token) {
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(user.getEmail());
+		mail.setFrom(this.senderEmail);
+		mail.setSubject("Email cím megerősítése");
+		mail.setText(
+				"Kedves " + user.getFirstname() + "!\n\nKérlek kattints ide az email címed megerősítéséhez: http://"
+						+ url + "/confirmAccount?token=" + token);
+
+		this.javaMailSender.send(mail);
+		this.logger.debug("Email sent to: " + user);
+	}
+
+}

@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import hu.djani.Manager.bean.Machine;
-import hu.djani.Manager.service.MachineGroupService;
-import hu.djani.Manager.service.MachineService;
-import hu.djani.Manager.service.ProjectService;
+import hu.djani.Manager.service.entity.MachineGroupService;
+import hu.djani.Manager.service.entity.MachineService;
+import hu.djani.Manager.service.entity.ProjectService;
 
 @Controller
 @RequestMapping("/machine")

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/main}"
+ th:with="currentPage='login'">
+<head>
+	<title>Email megerősítése</title>
+</head>
+<body>
+		
+	<div layout:fragment="content">
+		
+		<div th:if="${verificationSuccess} == false">
+			<div class="alert alert-danger alert-dismissible fade in">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong th:text="${verificationMessage}"></strong> A felhasználó megerősítése sikertelen.
+			</div>
+		</div>
+		
+		<div th:if="${verificationSuccess} != false">
+			<h1 class="text-center">Email elküldve!</h1>
+    		<h3 class="text-center">Kérlek nézd meg az email fiókod és kattints a megerősítő linkre!</h3>
+			<a href="/user/resendRegistrationToken"></a>
+		</div>
+		
+<!-- 		<p class="text-center">Amennyiben az email nem érkezett meg, vagy a link lejárt, kérlek kattints ide az újraküldéshez:</p> -->
+<!-- 		<br> -->
+<!-- 		<p class="text-center"><a href="/resendRegistrationToken?token=|${param.token}|" class="btn-lg btn-primary" role="button">Email Újraküldése</a></p> -->
+		
+	</div>
+</body>
+</html>

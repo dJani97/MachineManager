@@ -18,6 +18,11 @@ import hu.djani.Manager.bean.MachineGroup;
 import hu.djani.Manager.bean.Project;
 import hu.djani.Manager.bean.User;
 import hu.djani.Manager.bean.UserRole;
+import hu.djani.Manager.service.entity.MachineGroupService;
+import hu.djani.Manager.service.entity.MachineService;
+import hu.djani.Manager.service.entity.ProjectService;
+import hu.djani.Manager.service.entity.UserRoleService;
+import hu.djani.Manager.service.entity.UserService;
 
 @Service
 public class DataLoader {
@@ -47,6 +52,8 @@ public class DataLoader {
 	@PostConstruct
 	public void checkDatabase() {
 
+		String rootUserName = "root@root.com";
+
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
@@ -64,7 +71,7 @@ public class DataLoader {
 
 		User adminUser;
 		try {
-			adminUser = (User) this.userService.loadUserByUsername("root");
+			adminUser = (User) this.userService.loadUserByUsername(rootUserName);
 		} catch (UsernameNotFoundException ex) {
 			adminUser = new User();
 			adminUser.setAccountNonExpired(true);
@@ -72,7 +79,7 @@ public class DataLoader {
 			adminUser.setCredentialsNonExpired(true);
 			adminUser.setEnabled(true);
 			adminUser.setPassword(new BCryptPasswordEncoder().encode("root"));
-			adminUser.setUsername("root");
+			adminUser.setUsername(rootUserName);
 			adminUser.setFirstname("János");
 			adminUser.setLastname("Dobszai");
 			this.userService.save(adminUser);
@@ -83,7 +90,7 @@ public class DataLoader {
 			this.userService.save(adminUser);
 		}
 
-		adminUser = (User) this.userService.loadUserByUsername("root");
+		adminUser = (User) this.userService.loadUserByUsername(rootUserName);
 
 		adminRole = this.roleService.getByName(UserRoleService.ADMIN_ROLE);
 

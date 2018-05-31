@@ -11,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy;
 
-import hu.djani.Manager.service.UserService;
+import hu.djani.Manager.service.entity.UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -21,6 +21,12 @@ public class MachineSecurityConfig extends WebSecurityConfigurerAdapter {
  	private static final String[] AUTH_WHITELIST = {
 			"/",
 			"/machine/list"
+	};
+
+ 	private static final String[] AUTH_ANONYMOUS = {
+ 			"/login/**",
+ 			"/register/**",
+ 			"/confirmAccount/**"
 	};
 	// @formatter:on
 
@@ -44,8 +50,7 @@ public class MachineSecurityConfig extends WebSecurityConfigurerAdapter {
 		// @formatter:off
 		http
 			.authorizeRequests()
-				.antMatchers("/login/**").anonymous()
-				.antMatchers("/register/**").anonymous()
+				.antMatchers(AUTH_ANONYMOUS).anonymous()
 				.antMatchers(AUTH_WHITELIST).permitAll()
 				.anyRequest().authenticated()
 				.and()

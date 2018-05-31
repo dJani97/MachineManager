@@ -19,6 +19,7 @@ import javax.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import hu.djani.Manager.bean.validation.ValidEmail;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -36,6 +37,7 @@ public class User implements UserDetails {
 	@GeneratedValue
 	private Long id;
 
+	@ValidEmail(message = "Érvénytelen email formátum!")
 	@Column(name = "username", length = 100, nullable = false, unique = true)
 	@Size(min = 3, max = 100)
 	private String username;
@@ -54,7 +56,7 @@ public class User implements UserDetails {
 	private boolean credentialsNonExpired = true;
 
 	@Column(name = "enabled", nullable = false)
-	private boolean enabled = true;
+	private boolean enabled = false;
 
 	@Column(name = "firstname", length = 100, nullable = false)
 	@Size(min = 2, max = 100)

@@ -31,9 +31,9 @@ import hu.djani.Manager.event.OnRegistrationCompleteEvent;
 import hu.djani.Manager.service.entity.UserService;
 
 @Controller
-public class AuthController {
-
-	private Logger logger = LoggerFactory.getLogger(AuthController.class);
+@RequestMapping("/user")
+public class UserController {
+	private Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	UserService userService;
@@ -92,7 +92,8 @@ public class AuthController {
 			return "auth/register";
 		}
 
-		return "auth/verification";
+		return "redirect:/";
+		// return "redirect:user/view/" + user.getId(); // user/user/id TODO
 	}
 
 	@RequestMapping(value = "/confirmAccount", method = RequestMethod.GET)
@@ -102,15 +103,15 @@ public class AuthController {
 		if (verificationToken == null) {
 			model.addAttribute("verificationSuccess", false);
 			model.addAttribute("verificationMessage", "Nem létező token!");
-			return "auth/verification";
+			return "auth/login";
 		}
 
 		User user = verificationToken.getUser();
 		Calendar cal = Calendar.getInstance();
 		if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
 			model.addAttribute("verificationSuccess", false);
-			model.addAttribute("verificationMessage", "A token lejárt, ezért újat küldtünk.");
-			return "auth/verification";
+			model.addAttribute("verificationMessage", "Lejárt token!");
+			return "auth/login";
 		}
 
 		user.setEnabled(true);

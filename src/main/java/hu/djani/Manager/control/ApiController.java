@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import hu.djani.Manager.bean.Machine;
 import hu.djani.Manager.bean.Project;
 import hu.djani.Manager.component.PingComponent;
-import hu.djani.Manager.service.MachineService;
-import hu.djani.Manager.service.ProjectService;
+import hu.djani.Manager.service.entity.MachineService;
+import hu.djani.Manager.service.entity.ProjectService;
 
 @RestController
 @RequestMapping("/api/")

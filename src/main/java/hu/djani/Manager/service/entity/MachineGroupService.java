@@ -1,4 +1,4 @@
-package hu.djani.Manager.service;
+package hu.djani.Manager.service.entity;
 
 import java.util.List;
 
