@@ -21,11 +21,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
 @Table(name = "t_user")
 @Data
-// @ToString(exclude = "roles")
+@ToString(exclude = "password")
 @EqualsAndHashCode(exclude = "roles")
 public class User implements UserDetails {
 	private static final long serialVersionUID = -1103629629429559376L;
@@ -35,23 +36,25 @@ public class User implements UserDetails {
 	@GeneratedValue
 	private Long id;
 
-	@Column(name = "username", length = 100, nullable = false)
+	@Column(name = "username", length = 100, nullable = false, unique = true)
+	@Size(min = 3, max = 100)
 	private String username;
 
 	@Column(name = "password", length = 100, nullable = false)
+	@Size(min = 3, max = 100)
 	private String password;
 
 	@Column(name = "non_expired", nullable = false)
-	private boolean accountNonExpired;
+	private boolean accountNonExpired = true;
 
 	@Column(name = "non_locked", nullable = false)
-	private boolean accountNonLocked;
+	private boolean accountNonLocked = true;
 
 	@Column(name = "credentials_non_expired", nullable = false)
-	private boolean credentialsNonExpired;
+	private boolean credentialsNonExpired = true;
 
 	@Column(name = "enabled", nullable = false)
-	private boolean enabled;
+	private boolean enabled = true;
 
 	@Column(name = "firstname", length = 100, nullable = false)
 	@Size(min = 2, max = 100)
@@ -80,5 +83,13 @@ public class User implements UserDetails {
 
 	public String getFullname() {
 		return this.lastname + " " + this.firstname;
+	}
+
+	public String getEmail() {
+		return this.getUsername();
+	}
+
+	public void setEmail(String email) {
+		this.setUsername(email);
 	}
 }

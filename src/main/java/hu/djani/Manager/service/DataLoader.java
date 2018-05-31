@@ -54,11 +54,10 @@ public class DataLoader {
 			this.loadData();
 		}
 
-		UserRole adminRole = null; // = this.roleService.getByName(UserRoleService.ADMIN_ROLE);
+		UserRole adminRole = this.roleService.getByName(UserRoleService.ADMIN_ROLE);
 
 		if (adminRole == null) {
 			adminRole = new UserRole();
-			// adminRole.setId(0L);
 			adminRole.setAuthority(UserRoleService.ADMIN_ROLE);
 			this.roleService.save(adminRole);
 		}

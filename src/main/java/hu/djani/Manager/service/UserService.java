@@ -34,4 +34,8 @@ public class UserService implements UserDetailsService {
 		this.userDao.save(user);
 	}
 
+	public boolean isEmailAvailable(String email) {
+		return !this.userDao.existsByUsername(email);
+	}
+
 }

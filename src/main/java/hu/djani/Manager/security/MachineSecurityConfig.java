@@ -45,6 +45,7 @@ public class MachineSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers("/login/**").anonymous()
+				.antMatchers("/register/**").anonymous()
 				.antMatchers(AUTH_WHITELIST).permitAll()
 				.anyRequest().authenticated()
 				.and()

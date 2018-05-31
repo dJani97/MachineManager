@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml" layout:decorate="~{layout/main}"
+	th:with="currentPage='machine'">
+
+<head>
+<title>Edit machine</title>
+<meta charset="utf-8" />
+</head>
+<body>
+
+	<div layout:fragment="content" th:object="${user}">
+
+		<ol class="breadcrumb">
+			<li><a href="/">Home</a></li>
+			<li>Regisztráció</li>
+		</ol>
+		
+		<div th:if="${success} == false">
+			<div class="alert alert-danger alert-dismissible fade in">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Sikertelen regisztráció!</strong> Kérlek nézd át újra az űrlapot!
+			</div>
+		</div>
+		
+		<div th:if="${nameTaken} == true">
+			<div class="alert alert-danger alert-dismissible fade in">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Email foglalt!</strong> Ezen az email címen már regisztrál valaki, kérlek válassz egy másikat!
+			</div>
+		</div>
+		
+		<div th:if="${success} == true">
+			<div class="alert alert-success alert-dismissible fade in">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Sikeres regisztráció!</strong>
+			</div>
+		</div>
+
+
+		<form class="form-horizontal" th:action="@{/register}" method="post">
+
+			<div class="form-group" th:classappend="${#fields.hasErrors('firstname')} ? 'has-error has-feedback' : ''">
+				<label class="control-label col-sm-2" for="firstname">Vezetéknév:</label>
+				<div class="col-sm-8">
+					<input type="text" name="firstname" class="form-control" required
+						placeholder="Add meg a vezetékneved" th:field="*{firstname}" autofocus>
+					<td th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></td>
+					<span th:classappend="${#fields.hasErrors('firstname')} ? 'glyphicon glyphicon-remove form-control-feedback' : ''"></span>
+				</div>
+			</div>
+			
+			<div class="form-group" th:classappend="${#fields.hasErrors('lastname')} ? 'has-error has-feedback' : ''">
+				<label class="control-label col-sm-2" for="lastname">Keresztnév:</label>
+				<div class="col-sm-8">
+					<input type="text" name="lastname" class="form-control" required
+						placeholder="Add meg a keresztneved" th:field="*{lastname}">
+					<td th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></td>
+					<span th:classappend="${#fields.hasErrors('lastname')} ? 'glyphicon glyphicon-remove form-control-feedback' : ''"></span>
+				</div>
+			</div>
+			
+			<div class="form-group" th:classappend="${#fields.hasErrors('username')} ? 'has-error has-feedback' : ''">
+				<label class="control-label col-sm-2" for="email">E-mail cím:</label>
+				<div class="col-sm-8">
+					<input type="text" name="email" class="form-control" required
+						placeholder="Add meg az email címed" th:field="*{email}">
+					<td th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td>
+					<span th:classappend="${#fields.hasErrors('email')} ? 'glyphicon glyphicon-remove form-control-feedback' : ''"></span>
+				</div>
+			</div>
+			
+			<div class="form-group" th:classappend="${#fields.hasErrors('password')} ? 'has-error has-feedback' : ''">
+				<label class="control-label col-sm-2" for="password">Jelszó:</label>
+				<div class="col-sm-8">
+					<input type="password" name="password" class="form-control" required
+						placeholder="Add meg a jelszavad" th:field="*{password}">
+					<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
+					<span th:classappend="${#fields.hasErrors('password')} ? 'glyphicon glyphicon-remove form-control-feedback' : ''"></span>
+				</div>
+			</div>
+			
+			<div class="form-group text-center">
+				<button type="submit" formmethod="post" class="btn btn-primary">Regisztráció</button>
+			</div>
+
+		</form>
+
+		<script th:src="@{/js/fade_alert.js}"></script>
+		
+	</div>
+
+</body>
+</html>
