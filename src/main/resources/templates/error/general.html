@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorator="layout/main" th:with="currentPage='error'">
+<head>
+	<title>403 Forbidden</title>
+</head>
+<body>
+		
+	<div layout:fragment="content">
+		
+		<h2 th:text="Error ${status}"></h2>
+		<h4>Hiba történt az oldal betöltése közben.</h4>
+		
+	</div>
+		
+</body>
+</html>
