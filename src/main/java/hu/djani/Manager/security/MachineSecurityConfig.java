@@ -20,7 +20,8 @@ public class MachineSecurityConfig extends WebSecurityConfigurerAdapter {
 	// @formatter:off
  	private static final String[] AUTH_WHITELIST = {
 			"/",
-			"/machine/list"
+			"/machine/list",
+			"/api/**"
 	};
 
  	private static final String[] AUTH_ANONYMOUS = {
@@ -32,12 +33,6 @@ public class MachineSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserService userService;
-
-	// @Bean
-	// @Override
-	// public AuthenticationManager authenticationManagerBean() throws Exception {
-	// return super.authenticationManagerBean();
-	// }
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {

@@ -25,4 +25,8 @@ public class MachineService {
 	public void save(Machine machine) {
 		this.dao.save(machine);
 	}
+
+	public Long count() {
+		return this.dao.count();
+	}
 }

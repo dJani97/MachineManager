@@ -19,6 +19,8 @@ import javax.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import hu.djani.Manager.bean.validation.ValidEmail;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -42,6 +44,7 @@ public class User implements UserDetails {
 	@Size(min = 3, max = 100)
 	private String username;
 
+	@JsonIgnore
 	@Column(name = "password", length = 100, nullable = false)
 	@Size(min = 3, max = 100)
 	private String password;
@@ -66,11 +69,13 @@ public class User implements UserDetails {
 	@Size(min = 2, max = 100)
 	private String lastname;
 
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "t_user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Set<UserRole> roles = new HashSet<>();
 
 	@Override
+	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return Collections.unmodifiableCollection(this.roles);
 	}

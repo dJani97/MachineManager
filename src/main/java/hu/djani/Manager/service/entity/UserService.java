@@ -60,4 +60,8 @@ public class UserService implements UserDetailsService {
 		this.userDao.save(user);
 	}
 
+	public List<User> getList() {
+		return this.userDao.findAll();
+	}
+
 }
