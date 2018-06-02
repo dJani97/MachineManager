@@ -34,6 +34,9 @@ public class MachineSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private MachineSessionRegistryImpl sessionRegistryImpl;
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(this.userService).passwordEncoder(new BCryptPasswordEncoder());
@@ -50,11 +53,13 @@ public class MachineSecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
-//				.loginPage("/login")
-//				.loginProcessingUrl("/login")
 				.usernameParameter("email")
-				.permitAll();
-//				.and()
+				.permitAll()
+				.and()
+			.sessionManagement()
+				.maximumSessions(1)
+				.sessionRegistry(this.sessionRegistryImpl);
+
 //			.logout()
 //				.logoutSuccessUrl("/login?logout")
 //				.permitAll();
@@ -76,4 +81,8 @@ public class MachineSecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/js/**").antMatchers("/css/**");
 	}
 
+	// @Bean("machineSessionRegistryImpl")
+	// public SessionRegistry sessionRegistry() {
+	// return new MachineSessionRegistryImpl();
+	// }
 }

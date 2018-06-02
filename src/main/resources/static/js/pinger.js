@@ -1,5 +1,5 @@
 function ajax_ping(ip, callback) {
-	$.get("/api/ping/" + ip, response => {
+	$.get("/api/machine/ping/" + ip, response => {
 		if (response == true) {
 			callback('responded')
 		} else {
