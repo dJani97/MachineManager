@@ -30,7 +30,7 @@ import lombok.ToString;
 @Table(name = "t_user")
 @Data
 @ToString(exclude = "password")
-@EqualsAndHashCode(exclude = "roles")
+@EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
 	private static final long serialVersionUID = -1103629629429559376L;
 

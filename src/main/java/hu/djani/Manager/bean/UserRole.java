@@ -20,7 +20,7 @@ import lombok.ToString;
 @Table(name = "t_role")
 @Data()
 @ToString(exclude = "users")
-@EqualsAndHashCode(exclude = "users")
+@EqualsAndHashCode(of = "id")
 public class UserRole implements GrantedAuthority {
 	private static final long serialVersionUID = 1633397470969249426L;
 

@@ -17,10 +17,12 @@ import org.springframework.data.annotation.CreatedDate;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Table(name = "t_project")
 @Data
+@EqualsAndHashCode(of = "id")
 public class Project {
 
 	public Project() {
