@@ -38,7 +38,7 @@ async function updateUserList() {
     updateListWith(list_id, api_url, response => {
       response.forEach(u => {
         $(list_id + " ul").append(
-          "<li>" + u.lastname + " " + u.firstname + "</li>"
+          "<li><a href='/user/view/" + u.id + "'>" + u.lastname + " " + u.firstname + "</a></li>"
         );
       });
       if (response.length == 0) {
@@ -53,7 +53,9 @@ async function updateMachineList() {
 
     updateListWith(list_id, api_url, response => {
       response.forEach(m => {
-        $(list_id + " ul").append("<li>" + m.name + "</li>");
+        $(list_id + " ul").append(
+			"<li><a href='/machine/view/" + m.id + "'>" + m.name + "</a></li>"
+		);
       });
       if (response.length == 0) {
         $(list_id + " ul").append("nincs futó gép");
@@ -69,7 +71,8 @@ async function updateDashboard() {
 }
 
 window.onload = function() {
-  const refresh_time = 30000;
+  const salt = 2000;
+  const refresh_time = 60000 + Math.floor(Math.random() * salt);;
   $.ajaxSetup({ timeout: refresh_time - 1000 });
   updateDashboard();
   setInterval(updateDashboard, refresh_time);

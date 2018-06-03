@@ -21,8 +21,8 @@
 			<li>Gép Megtekintése</li>
 		</ol>
 
-		<div>
-			<div th:replace="fragments/machineFragment :: machine"> Place for a Virtual Machine </div>
+		<div th:with="extended=${true}">
+			<div th:replace="machine/fragment/machineFragment :: machine"> Place for a Virtual Machine </div>
 		</div>
 
 		<script th:src="@{/js/pinger.js}"></script>
