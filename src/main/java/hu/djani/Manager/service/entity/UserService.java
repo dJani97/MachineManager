@@ -32,10 +32,6 @@ public class UserService implements UserDetailsService {
 				.orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
 	}
 
-	public List<User> getAllUsers() {
-		return this.userDao.findAll();
-	}
-
 	@Transactional
 	public void registerNewUser(User user) {
 		if (this.isEmailAvailable(user.getEmail())) {
@@ -62,6 +58,14 @@ public class UserService implements UserDetailsService {
 
 	public List<User> getList() {
 		return this.userDao.findAll();
+	}
+
+	public User getById(Long id) {
+		return this.userDao.getOne(id);
+	}
+
+	public Long count() {
+		return this.userDao.count();
 	}
 
 }
