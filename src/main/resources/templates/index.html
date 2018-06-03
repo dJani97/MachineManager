@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="hu" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/main}"
- th:with="currentPage='home'">
+<html lang="hu" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/main}"
+	th:with="currentPage='home'">
 
 <head>
-	<title>MachineManager Kezdőlap</title>
-	<meta charset="utf-8" />
+<title>MachineManager Kezdőlap</title>
+<meta charset="utf-8" />
 </head>
-
 <body>
 
 	<div layout:fragment="content">
@@ -14,27 +14,105 @@
 		<div th:if="${raisePermissionAlert} == true">
 			<div class="alert alert-danger alert-dismissible fade in">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-				<strong>Figyelmeztetés:</strong> Az alkalmazás nem rendszergazdaként fut, a ping teszt hibás eredményt mutathat.
+				<strong>Figyelmeztetés:</strong> Az alkalmazás nem rendszergazdaként
+				fut, a ping teszt hibás eredményt mutathat.
 			</div>
 		</div>
 
-		<h2>Kezdőlap</h2>
+		<h2>Dashboard</h2>
 
-		<div class="row">
-			<div class="col-md-12">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisl libero, molestie vitae orci nec, luctus feugiat lorem.
-					Maecenas eu massa non neque blandit tempor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse
-					id consectetur enim, et cursus nisl. Ut volutpat tempor accumsan. Aliquam et libero id nunc consectetur consequat at
-					eu nibh. Nam ut justo in sapien fermentum facilisis.</p>
-				<p>Nullam sodales neque fringilla molestie facilisis. Morbi nisl neque, malesuada convallis felis vitae, pharetra maximus
-					lorem. Fusce tincidunt sapien pretium leo scelerisque, eget egestas nisi dapibus. Sed ut magna egestas, condimentum
-					ex vel, tempor justo. Duis ut magna et orci tincidunt vestibulum. Suspendisse sed enim nec mi convallis aliquam. Sed
-					id urna ultricies dolor dictum vulputate. Nulla porta auctor sagittis.</p>
+
+
+		<div class="container-fluid">
+			<div class="row content">
+				<br>
+
+				<div class="col-sm-12">
+
+					<!-- USERS -->
+
+					<div class="col-sm-6">
+
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="well text-center">
+									<h4>Felhasználók</h4>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="well">
+									<p>Regisztrált</p>
+									<h4 id="allUsers"></h4>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="well">
+									<p>Aktív</p>
+									<h4 id="activeUsers"></h4>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="well">
+									<p>Aktív felhasználók</p>
+									<div id="userList"></div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+
+
+					<!-- MACHINES -->
+
+					<div class="col-sm-6">
+
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="well text-center">
+									<h4>Gépek</h4>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="well">
+									<h>Összes</h>
+									<h4 id="allMachines"></h4>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="well">
+									<p>Futó</p>
+									<h4 id="activeMachines"></h4>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="well">
+									<p>Futó gépek</p>
+									<div id="machineList"></div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
 			</div>
 		</div>
+
+		<script th:src="@{/js/dashboard.js}"></script>
 
 	</div>
-
 </body>
-
 </html>
