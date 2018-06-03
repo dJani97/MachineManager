@@ -18,11 +18,13 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Entity
 @Table(name = "t_project")
 @Data
 @EqualsAndHashCode(of = "id")
+@ToString(exclude = { "groups" })
 public class Project {
 
 	public Project() {

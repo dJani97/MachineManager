@@ -34,6 +34,29 @@
 						</ul>
 					</li>
 					
+					<li class="dropdown" th:classappend="${currentPage == 'project' ? 'active' : ''}">
+						<a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">Projektek<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/project/list">Projektek</a></li>
+							<li><a href="/project/new">+ Új projekt</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-submenu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Csoportok</a>
+								<ul class="dropdown-menu">
+									<li th:each="project : ${@projectService.getList()}" th:object="${project}">
+										<a th:href="@{/project/view/} + *{id}">
+											<span th:text="*{name}"></span>
+										</a>
+									</li>
+								</ul>
+							</li>
+							<li><a href="/group/new">+ Új csoport</a></li>
+						</ul>
+					</li>
+					
 					<li class="dropdown" th:classappend="${currentPage == 'user' ? 'active' : ''}">
 						<a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
