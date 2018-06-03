@@ -56,6 +56,13 @@ public class MachineSecurityConfig extends WebSecurityConfigurerAdapter {
 				.usernameParameter("email")
 				.permitAll()
 				.and()
+			.logout()
+				.addLogoutHandler(new CustomLogoutHandler(this.sessionRegistryImpl))
+//				.clearAuthentication(true)
+//				.invalidateHttpSession(true)
+//				.deleteCookies("JSESSIONID")
+				.permitAll()
+				.and()
 			.sessionManagement()
 				.maximumSessions(1)
 				.sessionRegistry(this.sessionRegistryImpl);

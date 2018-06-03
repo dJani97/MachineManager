@@ -3,6 +3,7 @@ package hu.djani.Manager.security;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,17 @@ import hu.djani.Manager.bean.User;
 public class MachineSessionRegistryImpl extends SessionRegistryImpl {
 
 	public List<User> getUsersFromSessionRegistry() {
+
+		for (Object o : this.getAllPrincipals()) {
+			User u = (User) o;
+			List<SessionInformation> allSessions = this.getAllSessions(u, true);
+
+			System.out.println(u.getFullname() + " SESSION INFO:");
+			for (SessionInformation sessionInformation : allSessions) {
+				System.out.println(sessionInformation);
+			}
+		}
+
 		// @formatter:off
 	    return this.getAllPrincipals().stream()
 	      .filter(u -> !this.getAllSessions(u, false).isEmpty())
