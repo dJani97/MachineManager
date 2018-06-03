@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/main}"
+	th:with="currentPage='user'">
+
+<head>
+<title>Felhasználók</title>
+<meta charset="utf-8" />
+</head>
+
+<body>
+
+	<div layout:fragment="content">
+
+		<ol class="breadcrumb">
+			<li><a href="/">Home</a></li>
+			<li class="active">Felhasználók</li>
+		</ol>
+
+		<table id="user_table" class="table table-striped table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Név</th>
+					<th>Email</th>
+					<th>Jogosultságok</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${users}" th:object="${user}">
+					<td th:text="*{id}"></td>
+					<td>
+						<a th:href="@{/user/view/} + *{id}">
+							<span th:text="*{fullname}"></span>
+						</a>
+					</td>
+					<td>
+						<a th:href="|mailto:*{email}|">
+							<span th:text="*{email}"></span>
+						</a>
+					</td>
+					<td th:text="*{roles}"></td>
+				</tr>
+			</tbody>
+		</table>
+
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
+
+		<script>
+			$(document).ready(function() {
+				$('#user_table').DataTable({
+					"order" : [ [ 1, "asc" ] ],
+					"pageLength" : 50
+				});
+			});
+		</script>
+
+	</div>
+
+</body>
+
+</html>

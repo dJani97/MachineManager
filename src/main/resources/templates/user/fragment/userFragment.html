@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns="http://www.w3.org/1999/xhtml" 
-    layout:decorate="~{layout/main}"
-	th:with="currentPage='machine'">
+	xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="utf-8" />
@@ -23,7 +21,7 @@
 
     <div class="panel-body">
 
-      <a th:href="@{/machine/edit/} + *{id}" class="btn btn-default btn-sm pull-right" role="button">
+      <a th:href="@{/user/edit/} + *{id}" class="btn btn-default btn-sm pull-right" role="button">
         <i class="glyphicon glyphicon-edit"></i>
         adatlap szerkesztése
       </a>
