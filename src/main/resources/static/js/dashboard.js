@@ -4,76 +4,73 @@ function responseToParagraph(api_url, paragraph_id) {
 
   $.get(api_url, response => {
     $(paragraph_id).text(response);
+  }).always(msg => {
     $(paragraph_id)
-      .siblings("i:first")
+      .siblings("i")
+      .remove();
+  });
+}
+
+function updateListWith(list_id, api_url, response_handler) {
+  $(list_id).html("<ul></ul>");
+  $(list_id).after('<i class="loader"></i>');
+  $.get(api_url, response => response_handler(response)).always(msg => {
+    $(list_id)
+      .siblings("i")
       .remove();
   });
 }
 
 async function updateUserDetails() {
-  return new Promise(resolve => {
     responseToParagraph("/api/user/count", "#allUsers");
     responseToParagraph("/api/user/countOnline", "#activeUsers");
-  });
 }
 
 async function updateMachineDetails() {
-  return new Promise(resolve => {
     responseToParagraph("/api/machine/count", "#allMachines");
     responseToParagraph("/api/machine/countRunning", "#activeMachines");
-  });
 }
 
 async function updateUserList() {
-  return new Promise(resolve => {
-    $("#userList").html("<ul></ul>");
-    $("#userList").after('<i class="loader"></i>');
+	const list_id = "#userList";
+    const api_url = "/api/user/listOnline";
 
-    $.get("/api/user/listOnline", response => {
+    updateListWith(list_id, api_url, response => {
       response.forEach(u => {
-        $("#userList ul").append(
+        $(list_id + " ul").append(
           "<li>" + u.lastname + " " + u.firstname + "</li>"
         );
       });
-      $("#userList")
-        .siblings("i:first")
-        .remove();
       if (response.length == 0) {
-        $("#userList ul").append("nincs aktív felhasználó");
+        $(list_id + " ul").append("nincs aktív felhasználó");
       }
-    });
-  });
+	});
 }
 
 async function updateMachineList() {
-  return new Promise(resolve => {
-    $("#machineList").html("<ul></ul>");
-    $("#machineList").after('<i class="loader"></i>');
+    const list_id = "#machineList";
+    const api_url = "/api/machine/listRunning";
 
-    $.get("/api/machine/listRunning", response => {
+    updateListWith(list_id, api_url, response => {
       response.forEach(m => {
-        $("#machineList ul").append("<li>" + m.name + "</li>");
+        $(list_id + " ul").append("<li>" + m.name + "</li>");
       });
-      $("#machineList")
-        .siblings("i:first")
-        .remove();
       if (response.length == 0) {
-        $("#machineList ul").append("nincs futó gép");
+        $(list_id + " ul").append("nincs futó gép");
       }
     });
-  });
 }
 
 async function updateDashboard() {
-  await Promise.all([
-    updateUserDetails(),
-    updateMachineDetails(),
-    updateUserList(),
-    updateMachineList()
-  ]);
+    updateUserDetails();
+    updateMachineDetails();
+    updateUserList();
+    updateMachineList();
 }
 
 window.onload = function() {
+  const refresh_time = 30000;
+  $.ajaxSetup({ timeout: refresh_time - 1000 });
   updateDashboard();
-  setInterval(updateDashboard, 30000);
+  setInterval(updateDashboard, refresh_time);
 };
