@@ -45,23 +45,27 @@
 					</li>
 				</ul>
 				
-				<div sec:authorize="isAnonymous()" class="navbar-text navbar-right">
-					<a href="/register"><span class="glyphicon glyphicon-user"></span> Regisztráció</a>
-					&nbsp | &nbsp
-			    	<a href="/login"><span class="glyphicon glyphicon-log-in"></span> Bejelentkezés</a>
-				</div>
-				
-				<div sec:authorize="isAuthenticated()" class="navbar-text navbar-right">
+				<ul class="nav navbar-nav navbar-right" sec:authorize="isAnonymous()">
+			      <li>
+			      	<a href="/register"><span class="glyphicon glyphicon-user"></span> Regisztráció</a>
+			      </li>
+			      <li>
+			      	<a href="/login"><span class="glyphicon glyphicon-log-in"></span> Bejelentkezés</a>
+			      </li>
+			    </ul>
+			    
+			    <ul class="nav navbar-nav navbar-right" sec:authorize="isAuthenticated()">
+			      <li>
+			      	<a th:href="@{/user/view/} + ${#authentication.principal.id}">
+						<span sec:authentication="principal.fullname">UserName</span>
+						(<span sec:authentication="name">UserName</span>)
+					</a>
+			      </li>
+			      <li>
 					<a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logout</a>
-				</div>
-								
-				<div sec:authorize="isAuthenticated()" class="navbar-text navbar-right">
-					<span sec:authentication="principal.fullname">UserName</span>
-					(<span sec:authentication="name">UserName</span>)
-					&nbsp |
 					<form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline"></form>
-				</div>	
-				
+			      </li>
+			    </ul>
 			</div>
 		</div>
 	</nav>
