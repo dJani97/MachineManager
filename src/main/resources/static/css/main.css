@@ -2,7 +2,6 @@ html {
 	margin-left: calc(100vw - 100%);
 }
 
-
 :root {
     --icon-size: 10px;
     --spinner-size: 14px;

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/main}"
+ th:with="currentPage='machine'">
+
+<head>
+	<title th:text="${user.fullname}">Full Name</title>
+	<meta charset="utf-8" />
+</head>
+
+<body>
+
+	<div layout:fragment="content">
+
+		<ol class="breadcrumb">
+			<li>
+				<a href="/">Home</a>
+			</li>
+			<li>
+				<a href="/user/list">Felhasználók</a>
+			</li>
+			<li class="active">Felhasználó Megtekintése</li>
+		</ol>
+
+		<div>
+			<div th:replace="user/fragment/userFragment :: user"> Place for a Virtual Machine </div>
+		</div>
+		
+	</div>
+
+</body>
+
+</html>

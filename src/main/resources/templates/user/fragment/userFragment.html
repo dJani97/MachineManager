@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml" 
+    layout:decorate="~{layout/main}"
+	th:with="currentPage='machine'">
+
+<head>
+  <meta charset="utf-8" />
+</head>
+
+<body>
+
+  <div th:fragment="user" class="panel panel-primary" th:object="${user}">
+
+    <div class="panel-heading" th:href="|#*{id}|">
+      <h4 class="panel-title">
+        <i class="fas fa-user">
+          <span th:text="*{fullname}">Machine Name</span>
+        </i>
+        <span class="clearfix"></span>
+      </h4>
+    </div>
+
+    <div class="panel-body">
+
+      <a th:href="@{/machine/edit/} + *{id}" class="btn btn-default btn-sm pull-right" role="button">
+        <i class="glyphicon glyphicon-edit"></i>
+        adatlap szerkesztése
+      </a>
+
+      <p>
+        <strong>id:</strong>
+        <span th:text="*{id}"></span>
+      </p>        
+      
+      <p>
+        <strong>név:</strong>
+        <span th:text="*{fullname}"></span>
+      </p>
+      
+      <p>
+        <strong>email:</strong>
+        <a th:href="|mailto:*{email}|">
+        	<span th:text="*{email}"></span>
+        </a>
+      </p>
+      
+      <p>
+        <strong>engedélyezve:</strong>
+        <span th:text="*{enabled ? 'igen' : 'nem'}"></span>
+      </p>
+      
+      <p>
+        <strong>jogkörök:</strong>
+        <span th:text="*{roles}"></span>
+      </p>
+      
+    </div>
+  </div>
+</body>

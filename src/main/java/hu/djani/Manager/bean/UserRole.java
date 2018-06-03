@@ -14,12 +14,10 @@ import org.springframework.security.core.GrantedAuthority;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @Entity
 @Table(name = "t_role")
 @Data()
-@ToString(exclude = "users")
 @EqualsAndHashCode(of = "id")
 public class UserRole implements GrantedAuthority {
 	private static final long serialVersionUID = 1633397470969249426L;
@@ -34,4 +32,12 @@ public class UserRole implements GrantedAuthority {
 	@ManyToMany(mappedBy = "roles")
 	private Set<User> users = new HashSet<>();
 
+	@Override
+	public String toString() {
+		if (this.authority.contains("_")) {
+			int first = this.authority.indexOf("_");
+			return this.authority.substring(first + 1);
+		}
+		return this.authority;
+	}
 }
