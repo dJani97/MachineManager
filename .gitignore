@@ -20,3 +20,5 @@ target/
 
 # Dolphin File Manager
 .directory
+
+\.factorypath
