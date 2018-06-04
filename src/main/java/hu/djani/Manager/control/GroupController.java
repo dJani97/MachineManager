@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import hu.djani.Manager.bean.MachineGroup;
 import hu.djani.Manager.service.entity.MachineGroupService;
+import hu.djani.Manager.service.entity.MachineService;
 
 @Controller
 @RequestMapping("/group")
@@ -19,11 +19,14 @@ public class GroupController {
 	@Autowired
 	MachineGroupService groupService;
 
+	@Autowired
+	MachineService machineService;
+
 	@RequestMapping("/view/{id}")
 	public String viewUser(Model model, @PathVariable("id") int id) {
-		MachineGroup group = this.groupService.getById(id);
-		model.addAttribute("group", group);
-		return "group/view";
+		model.addAttribute("machines", this.machineService.getList());
+		model.addAttribute("searchFor", this.groupService.getById(id).getName());
+		return "machine/table";
 	}
 
 }

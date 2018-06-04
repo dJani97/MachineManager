@@ -79,12 +79,15 @@
 		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
+		
+		<span id='searchFor' style="display:none" th:text="${searchFor} ? ${searchFor} : ''"></span>
 
 		<script>
 			$(document).ready(function() {
 				$('#machine_table').DataTable({
 					"order" : [ [ 3, "asc" ], [ 4, "asc" ] ],
-					"pageLength" : 100
+					"pageLength" : 100,
+					"oSearch": { "sSearch": $('#searchFor').text() }
 				});
 			});
 		</script>
