@@ -29,7 +29,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "t_user")
 @Data
-@ToString(exclude = "password")
+@ToString(exclude = { "password", "projects" })
 @EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
 	private static final long serialVersionUID = -1103629629429559376L;
@@ -74,6 +74,9 @@ public class User implements UserDetails {
 	@JoinTable(name = "t_user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Set<UserRole> roles = new HashSet<>();
 
+	@ManyToMany(mappedBy = "owners", fetch = FetchType.EAGER)
+	private Set<Project> projects = new HashSet<>();
+
 	@Override
 	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -98,5 +101,11 @@ public class User implements UserDetails {
 
 	public void setEmail(String email) {
 		this.setUsername(email);
+	}
+
+	public void addProject(Project project) {
+		if (!this.projects.contains(project)) {
+			this.projects.add(project);
+		}
 	}
 }

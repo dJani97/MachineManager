@@ -1,14 +1,10 @@
 package hu.djani.Manager.service;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -54,12 +50,8 @@ public class DataLoader {
 
 		String rootUserName = "root@root.com";
 
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-
-		if (this.machineService.getList().isEmpty()) {
-			this.loadData();
-		}
+		// List<GrantedAuthority> authorities = new ArrayList<>();
+		// authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
 		UserRole adminRole = this.roleService.getByName(UserRoleService.ADMIN_ROLE);
 
@@ -97,9 +89,12 @@ public class DataLoader {
 		System.out.println("admin: " + adminUser);
 		System.out.println("role: " + adminRole);
 
+		if (this.machineService.getList().isEmpty()) {
+			this.loadData(adminUser);
+		}
 	}
 
-	public void loadData() {
+	public void loadData(User owner) {
 		// @formatter:off
 
 
@@ -108,7 +103,9 @@ public class DataLoader {
 		 */
 
 		Project projectNoe = new Project("NOÉ");
+		projectNoe.addOwner(owner);
 		Project projectHuedu = new Project("HUEDU");
+		projectHuedu.addOwner(owner);
 		Project projectTeszt = new Project("Teszt");
 
 		/*

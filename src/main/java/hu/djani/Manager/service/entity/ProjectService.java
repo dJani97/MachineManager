@@ -25,4 +25,8 @@ public class ProjectService {
 	public void save(Project group) {
 		this.dao.save(group);
 	}
+
+	public void deleteById(Integer id) {
+		this.dao.deleteById(id);
+	}
 }
