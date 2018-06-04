@@ -23,7 +23,7 @@
     <table id="project_table" class="table table-striped table-hover table-bordered">
 		<thead>
 			<tr>
-				<th>ID</th>
+<!-- 				<th>ID</th> -->
 				<th>Projekt Név</th>
 				<th>Projekt Csoportjai</th>
 				<th>Tulajdonosok</th>
@@ -32,7 +32,7 @@
 		</thead>
 		<tbody>
 			<tr th:each="project : ${projects}" th:object="${project}">
-				<td th:text="*{id}"></td>
+<!-- 				<td th:text="*{id}"></td> -->
 				<td>
 					<a th:href="@{/project/view/} + *{id}">
 						<span th:text="*{name}"></span>
