@@ -18,9 +18,9 @@ public class MachineSessionRegistryImpl extends SessionRegistryImpl {
 			User u = (User) o;
 			List<SessionInformation> allSessions = this.getAllSessions(u, true);
 
-			System.out.println(u.getFullname() + " SESSION INFO:");
+			// System.out.println(u.getFullname() + " SESSION INFO:");
 			for (SessionInformation sessionInformation : allSessions) {
-				System.out.println(sessionInformation);
+				// System.out.println(sessionInformation);
 			}
 		}
 

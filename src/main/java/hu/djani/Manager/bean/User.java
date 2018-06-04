@@ -75,6 +75,7 @@ public class User implements UserDetails {
 	private Set<UserRole> roles = new HashSet<>();
 
 	@ManyToMany(mappedBy = "owners", fetch = FetchType.EAGER)
+	@JsonIgnore
 	private Set<Project> projects = new HashSet<>();
 
 	@Override
