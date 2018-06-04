@@ -62,6 +62,30 @@
           <strong>létrehozva:</strong>
           <span th:text="*{#calendars.format(creationDate, 'yyyy. MMMMM dd. HH:mm')}"></span>
         </p>
+       
+       <p>
+	       <strong>projekt:</strong>
+			<span th:if="*{group}">
+				<a th:href="@{/project/view/} + *{group.project.id}">
+					<span th:text="*{group.project.name}"></span>
+				</a>	
+			</span>
+			<span th:unless="*{group}">
+				<span>nincs</span>
+			</span>
+		</p>
+	
+		<p>
+			<strong>gépcsoport:</strong>
+			<span th:if="*{group}">
+				<a th:href="@{/group/view/} + *{group.id}">
+					<span th:text="*{group.name}"></span>
+				</a>	
+			</span>
+			<span th:unless="*{group}">
+				<span>nincs</span>
+			</span>
+		</p>
 
       </div>
     </div>
