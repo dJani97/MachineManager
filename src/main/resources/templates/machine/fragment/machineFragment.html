@@ -26,9 +26,16 @@
     <div th:id="*{id}" class="panel-collapse" th:classappend="${extended} ? '' : collapse">
       <div class="panel-body">
 
+		<a th:href="@{/machine/delete/} + *{id} + @{?source=list}" class="btn btn-danger btn-sm pull-right" role="button">
+          <i class="glyphicon glyphicon-trash"></i>
+          törlés
+        </a>
+        
+        <span class="pull-right">&nbsp;&nbsp;</span>
+
         <a th:href="@{/machine/edit/} + *{id}" class="btn btn-default btn-sm pull-right" role="button">
           <i class="glyphicon glyphicon-edit"></i>
-          adatlap megnyitása
+          szerkesztés
         </a>
 
         <p>

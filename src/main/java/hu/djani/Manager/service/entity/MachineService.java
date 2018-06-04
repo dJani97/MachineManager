@@ -29,4 +29,8 @@ public class MachineService {
 	public Long count() {
 		return this.dao.count();
 	}
+
+	public void deleteById(Integer id) {
+		this.dao.deleteById(id);
+	}
 }

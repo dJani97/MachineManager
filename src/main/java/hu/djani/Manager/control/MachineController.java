@@ -1,5 +1,6 @@
 package hu.djani.Manager.control;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import hu.djani.Manager.bean.Machine;
 import hu.djani.Manager.service.entity.MachineGroupService;
@@ -33,6 +35,12 @@ public class MachineController {
 		model.addAttribute("groups", this.groupService.getList());
 
 		return "machine/list";
+	}
+
+	@RequestMapping("/table")
+	public String machineTable(Model model) {
+		model.addAttribute("machines", this.machineService.getList());
+		return "machine/table";
 	}
 
 	@GetMapping("/view/{id}")
@@ -80,5 +88,14 @@ public class MachineController {
 		model.addAttribute("success", true);
 
 		return "machine/edit";
+	}
+
+	@GetMapping("/delete/{id}")
+	public String deleteMachine(HttpServletRequest request, @PathVariable Integer id, @RequestParam String source) {
+		this.machineService.deleteById(id);
+		if (source != null) {
+			return "redirect:/machine/" + source;
+		}
+		return "redirect:/machine/list";
 	}
 }

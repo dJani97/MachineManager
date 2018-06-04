@@ -23,8 +23,9 @@
 		<thead>
 			<tr>
 				<th>ID</th>
-				<th>Név</th>
-				<th>Csoportok</th>
+				<th>Projekt Név</th>
+				<th>Projekt Csoportjai</th>
+				<th class="col-xs-1">Törlés</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -41,8 +42,14 @@
 							<a th:href="@{/group/view/} + *{id}">
 								<span th:text="*{name}"></span>
 							</a>
+							(<span th:text="*{getMachines().size()}"></span> gép)
 						</li>
 					</ul>
+				</td>
+				<td>
+					<a th:href="@{/project/delete/} + *{id} + @{?source=list}" class="btn btn-danger" role="button" style="display:block;">
+						&nbsp&nbsp<i class="glyphicon glyphicon-trash"></i>&nbsp&nbsp
+					</a>
 				</td>
 			</tr>
 		</tbody>

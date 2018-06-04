@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/main}"
+	th:with="currentPage='machine'">
+
+<head>
+<title>Gépek Táblázata</title>
+<meta charset="utf-8" />
+</head>
+
+<body>
+
+	<div layout:fragment="content">
+
+		<ol class="breadcrumb">
+			<li><a href="/">Home</a></li>
+			<li class="active">Gépek Táblázata</li>
+		</ol>
+
+		<table id="machine_table" class="table table-striped table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Név</th>
+					<th>Cím</th>
+					<th>Projekt</th>
+					<th>Csoport</th>
+					<th>Szerk.</th>
+					<th>Töröl</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="machine : ${machines}" th:object="${machine}">
+					<td th:text="*{id}"></td>
+					<td>
+						<a th:href="@{/machine/view/} + *{id}">
+							<span th:text="*{name}"></span>
+						</a>
+					</td>
+					<td>
+						<a th:href="@{http://} + *{address}">
+							<span th:text="*{address}"></span>
+						</a>
+					</td>
+					<td>
+						<div th:if="*{group}">
+							<a th:href="@{/project/view/} + *{group.project.id}">
+								<span th:text="*{group.project.name}"></span>
+							</a>	
+						</div>
+						<div th:unless="*{group}">
+							<span>nincs</span>
+						</div>
+					</td>
+					<td>
+						<div th:if="*{group}">
+							<a th:href="@{/group/view/} + *{group.id}">
+								<span th:text="*{group.name}"></span>
+							</a>	
+						</div>
+						<div th:unless="*{group}">
+							<span>nincs</span>
+						</div>
+					</td>
+					<td>
+						<a th:href="@{/machine/edit/} + *{id}" class="btn btn-xs btn-default" role="button" style="display:block;">
+							<i class="glyphicon glyphicon-edit"></i>
+						</a>
+					</td>
+					<td>
+						<a th:href="@{/machine/delete/} + *{id} + @{?source=table}" class="btn btn-xs btn-danger" role="button" style="display:block;">
+							<i class="glyphicon glyphicon-trash"></i>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
+
+		<script>
+			$(document).ready(function() {
+				$('#machine_table').DataTable({
+					"order" : [ [ 3, "asc" ], [ 4, "asc" ] ],
+					"pageLength" : 100
+				});
+			});
+		</script>
+
+	</div>
+
+</body>
+
+</html>
