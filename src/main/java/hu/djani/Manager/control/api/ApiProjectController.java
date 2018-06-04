@@ -46,8 +46,8 @@ public class ApiProjectController {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		}
 
-		User user = (User) principal;
-		if (user.getProjects().contains(this.projectService.getById(id))) {
+		Long userId = ((User) principal).getId();
+		if (this.userService.getById(userId).getProjects().contains(this.projectService.getById(id))) {
 			this.projectService.deleteById(id);
 			return ResponseEntity.accepted().build();
 		}
@@ -66,11 +66,11 @@ public class ApiProjectController {
 		User user = (User) principal;
 		Project project = new Project(name);
 
-		user.addProject(project);
 		project.addOwner(user);
 
 		this.projectService.save(project);
 		this.userService.save(user);
+
 		return ResponseEntity.accepted().build();
 	}
 
