@@ -53,7 +53,7 @@ public class User implements UserDetails {
 	private boolean accountNonExpired = true;
 
 	@Column(name = "non_locked", nullable = false)
-	private boolean accountNonLocked = false;
+	private boolean accountNonLocked = true;
 
 	@Column(name = "credentials_non_expired", nullable = false)
 	private boolean credentialsNonExpired = true;
