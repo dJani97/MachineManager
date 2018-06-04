@@ -30,13 +30,13 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li><a href="/machine/list">Géppark</a></li>
-							<li><a href="/machine/table">Táblázat</a></li>
-							<li class="divider"></li>
+							<li sec:authorize="isAuthenticated()"><a href="/machine/table">Táblázat</a></li>
+							<li sec:authorize="isAuthenticated()" class="divider"></li>
 							<li sec:authorize="isAuthenticated()"><a href="/machine/new">+ Hozzáadás</a></li>
 						</ul>
 					</li>
 					
-					<li class="dropdown" th:classappend="${currentPage == 'project' ? 'active' : ''}">
+					<li sec:authorize="isAuthenticated()" class="dropdown" th:classappend="${currentPage == 'project' ? 'active' : ''}">
 						<a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
 							aria-expanded="false">Projektek<span class="caret"></span>
@@ -59,7 +59,7 @@
 						</ul>
 					</li>
 					
-					<li class="dropdown" th:classappend="${currentPage == 'user' ? 'active' : ''}">
+					<li sec:authorize="isAuthenticated()" class="dropdown" th:classappend="${currentPage == 'user' ? 'active' : ''}">
 						<a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
 							aria-expanded="false">Felhasználók <span class="caret"></span>
