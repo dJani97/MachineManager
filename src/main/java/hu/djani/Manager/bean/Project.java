@@ -3,6 +3,7 @@ package hu.djani.Manager.bean;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,7 +55,7 @@ public class Project {
 	 * relationships
 	 */
 
-	@OneToMany(mappedBy = "project")
+	@OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@JsonManagedReference
 	private List<MachineGroup> groups;
 

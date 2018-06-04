@@ -3,6 +3,7 @@ package hu.djani.Manager.bean;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -57,7 +58,7 @@ public class MachineGroup {
 	 * relationships
 	 */
 
-	@OneToMany(mappedBy = "group")
+	@OneToMany(mappedBy = "group", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@JsonManagedReference
 	private List<Machine> machines;
 
