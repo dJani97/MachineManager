@@ -63,14 +63,18 @@
 						</div>
 					</td>
 					<td>
-						<a th:href="@{/machine/edit/} + *{id}" class="btn btn-xs btn-default" role="button" style="display:block;">
-							<i class="glyphicon glyphicon-edit"></i>
-						</a>
-					</td>
+						<div th:if="${machine.group.project.owners.contains(#authentication.principal)}">
+							<a th:href="@{/machine/edit/} + *{id}" class="btn btn-xs btn-default" role="button" style="display:block;">
+								<i class="glyphicon glyphicon-edit"></i>
+							</a>
+						</div>
+					</td>					
 					<td>
-						<a th:href="@{/machine/delete/} + *{id} + @{?source=table}" class="btn btn-xs btn-danger" role="button" style="display:block;">
-							<i class="glyphicon glyphicon-trash"></i>
-						</a>
+						<div th:if="${machine.group.project.owners.contains(#authentication.principal)}">
+							<a th:href="@{/machine/delete/} + *{id} + @{?source=table}" class="btn btn-xs btn-danger" role="button" style="display:block;">
+								<i class="glyphicon glyphicon-trash"></i>
+							</a>
+						</div>
 					</td>
 				</tr>
 			</tbody>
