@@ -87,7 +87,10 @@ public class UserService implements UserDetailsService {
 			this.projectDao.save(project);
 		}
 
-		this.tokenDao.delete(this.tokenDao.findByUser(user));
+		VerificationToken token = this.tokenDao.findByUser(user);
+		if (token != null) {
+			this.tokenDao.delete(token);
+		}
 
 		this.sessionRegistry.forceLogout(user);
 
