@@ -1,6 +1,7 @@
 package hu.djani.Manager.service.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -10,20 +11,28 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import hu.djani.Manager.bean.Project;
 import hu.djani.Manager.bean.User;
 import hu.djani.Manager.bean.VerificationToken;
+import hu.djani.Manager.dao.ProjectDao;
 import hu.djani.Manager.dao.UserDao;
 import hu.djani.Manager.dao.VerificationTokenDao;
+import hu.djani.Manager.security.MachineSessionRegistryImpl;
 
 @Service
 public class UserService implements UserDetailsService {
 	private UserDao userDao;
+	private ProjectDao projectDao;
 	private VerificationTokenDao tokenDao;
+	private MachineSessionRegistryImpl sessionRegistry;
 
 	@Autowired
-	public UserService(UserDao userDao, VerificationTokenDao tokenDao) {
+	public UserService(UserDao userDao, VerificationTokenDao tokenDao, ProjectDao projectDao,
+			MachineSessionRegistryImpl sessionRegistry) {
 		this.userDao = userDao;
 		this.tokenDao = tokenDao;
+		this.projectDao = projectDao;
+		this.sessionRegistry = sessionRegistry;
 	}
 
 	@Override
@@ -66,6 +75,24 @@ public class UserService implements UserDetailsService {
 
 	public Long count() {
 		return this.userDao.count();
+	}
+
+	public void deleteById(Long id) {
+		User user = this.userDao.getOne(id);
+		Set<Project> projects = user.getProjects();
+		for (Project project : projects) {
+			Set<User> owners = project.getOwners();
+			owners.remove(user);
+			project.setOwners(owners);
+			this.projectDao.save(project);
+		}
+
+		this.tokenDao.delete(this.tokenDao.findByUser(user));
+
+		this.sessionRegistry.forceLogout(user);
+
+		this.userDao.deleteById(id);
+
 	}
 
 }

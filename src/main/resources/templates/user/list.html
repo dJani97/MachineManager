@@ -6,6 +6,7 @@
 <head>
 <title>Felhasználók</title>
 <meta charset="utf-8" />
+<script th:src="@{/js/user_api.js}"></script>
 </head>
 
 <body>
@@ -24,6 +25,7 @@
 					<th>Név</th>
 					<th>Email</th>
 					<th>Jogosultságok</th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')" class="col-xs-1">Törlés</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -40,6 +42,11 @@
 						</a>
 					</td>
 					<td th:text="*{roles}"></td>
+					<td sec:authorize="hasRole('ROLE_ADMIN')">
+						<a th:onclick="'javascript:deleteUser(\'' + *{id} + '\')'" class="btn btn-xs btn-danger" role="button" style="display:block;">
+							<i class="glyphicon glyphicon-trash"></i>
+						</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>

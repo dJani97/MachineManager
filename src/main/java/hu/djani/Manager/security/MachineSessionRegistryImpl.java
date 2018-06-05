@@ -39,4 +39,13 @@ public class MachineSessionRegistryImpl extends SessionRegistryImpl {
 	public boolean isActive(User user) {
 		return this.getUsersFromSessionRegistry().contains(user);
 	}
+
+	public void forceLogout(User user) {
+		List<SessionInformation> allSessions = this.getAllSessions(user, true);
+
+		for (SessionInformation sessionInformation : allSessions) {
+			sessionInformation.expireNow();
+			this.removeSessionInformation(sessionInformation.getSessionId());
+		}
+	}
 }
