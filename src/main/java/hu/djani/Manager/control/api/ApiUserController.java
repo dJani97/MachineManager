@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +18,6 @@ import hu.djani.Manager.service.entity.UserService;
 @RestController
 @RequestMapping("/api/user/")
 public class ApiUserController {
-	private Logger logger = LoggerFactory.getLogger(ApiUserController.class);
 
 	@Autowired
 	UserService userService;

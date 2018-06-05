@@ -9,6 +9,7 @@ import lombok.Getter;
 
 @Getter
 public class OnRegistrationCompleteEvent extends ApplicationEvent {
+	private static final long serialVersionUID = -6385936386620396885L;
 
 	private final String appUrl;
 	private final Locale locale;

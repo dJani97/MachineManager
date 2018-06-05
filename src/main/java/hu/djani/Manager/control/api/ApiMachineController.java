@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +17,6 @@ import hu.djani.Manager.service.entity.MachineService;
 @RestController
 @RequestMapping("/api/machine")
 public class ApiMachineController {
-	private Logger logger = LoggerFactory.getLogger(ApiMachineController.class);
 
 	@Autowired
 	MachineService machineService;

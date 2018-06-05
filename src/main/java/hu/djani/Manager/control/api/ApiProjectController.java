@@ -2,8 +2,6 @@ package hu.djani.Manager.control.api;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +18,6 @@ import hu.djani.Manager.service.entity.UserService;
 @RestController
 @RequestMapping("/api/project")
 public class ApiProjectController {
-	private Logger logger = LoggerFactory.getLogger(ApiProjectController.class);
 
 	@Autowired
 	ProjectService projectService;
