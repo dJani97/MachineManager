@@ -34,9 +34,8 @@ public class NotificationService {
 		mail.setFrom(this.senderEmail);
 		mail.setSubject("Email cím megerősítése");
 		mail.setText(
-				"Kedves " + user.getFirstname() + "!\n\nKérlek kattints ide az email címed megerősítéséhez: http://"
-						+ url.replace(this.redirectPort.toString(), this.appPort.toString()) + "/confirmAccount?token="
-						+ token);
+				"Kedves " + user.getFirstname() + "!\n\nKérlek kattints ide az email címed megerősítéséhez: https://"
+						+ url + "/confirmAccount?token=" + token);
 
 		this.javaMailSender.send(mail);
 		this.logger.debug("Email sent to: " + user);
