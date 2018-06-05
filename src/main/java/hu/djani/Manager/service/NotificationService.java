@@ -22,12 +22,6 @@ public class NotificationService {
 	@Value("${spring.mail.username}")
 	private String senderEmail;
 
-	@Value("${server.address}")
-	private String serverAddress;
-
-	@Value("${server.port}")
-	private String serverPort;
-
 	public void sendAccountVerification(User user, String url, String token) {
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setTo(user.getEmail());
