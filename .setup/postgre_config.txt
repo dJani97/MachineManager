@@ -1,0 +1,29 @@
+useful: https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e
+
+___ linux ___:
+
+zypper in postgresql postgresql-server postgresql-contrib
+
+systemctl enable postgresql
+systemctl start postgresql
+
+config1: /var/lib/pgsql/data/postgresql.conf
+
+config2: /var/lib/pgsql/data/pg_hba.conf
+local   machine         machine                          md5
+
+
+sudo systemctl restart postgresql.service
+
+su - postgres
+
+____ create database ____
+
+psql
+CREATE ROLE machine WITH PASSWORD 'Password111';
+ALTER ROLE machine WITH SUPERUSER;
+
+CREATE DATABASE machine;
+
+grant all privileges on database machine to machine;
+alter role machine with login;
