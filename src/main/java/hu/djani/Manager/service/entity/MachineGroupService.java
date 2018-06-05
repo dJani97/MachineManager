@@ -25,4 +25,8 @@ public class MachineGroupService {
 	public void save(MachineGroup group) {
 		this.dao.save(group);
 	}
+
+	public void deleteById(Integer id) {
+		this.dao.deleteById(id);
+	}
 }
