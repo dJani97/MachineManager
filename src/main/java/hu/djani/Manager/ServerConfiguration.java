@@ -36,7 +36,7 @@ public class ServerConfiguration {
 	private Connector initHttpConnector() {
 		Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
 		connector.setScheme("http");
-		connector.setPort(8888); // 80 lenne
+		connector.setPort(8800); // 80 lenne
 		connector.setSecure(false);
 		connector.setRedirectPort(8443); // 443 lenne
 		return connector;
