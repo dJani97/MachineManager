@@ -76,6 +76,9 @@ public class MachineController {
 		System.out.println("Machine posted:\n" + machine + "\nGroup ID: " + groupId);
 		if (groupId != null) {
 			machine.setGroup(this.groupService.getById(groupId));
+		} else {
+			model.addAttribute("success", false);
+			return "machine/edit";
 		}
 
 		if (bindingResult.hasErrors()) {
