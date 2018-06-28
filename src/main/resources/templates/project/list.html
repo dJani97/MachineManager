@@ -4,7 +4,7 @@
       layout:decorate="~{layout/main}" h:with="currentPage='project'">
 
 <head>
-<title>Géppark</title>
+<title>Projektek</title>
 <meta charset="utf-8" />
 <script th:src="@{/js/project_api.js}"></script>
 </head>
@@ -60,7 +60,8 @@
 				
 				<td>
 				<!-- th:if="${#authentication.principal.projects.contains(project)}" -->
-					<div th:if="${project.owners.contains(#authentication.principal)}">
+				<!-- th:if="${project.owners.contains(#authentication.principal)}"   -->
+					<div th:if="${@authorizationService.isCurrentUserOwnerOf(project)}">
 						<a th:onclick="'javascript:deleteProject(\'' + *{id} + '\')'" class="btn btn-danger" role="button" style="display:block;">
 							<i class="glyphicon glyphicon-trash"></i>
 						</a>

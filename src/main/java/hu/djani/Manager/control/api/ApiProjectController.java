@@ -5,13 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.djani.Manager.bean.Project;
 import hu.djani.Manager.bean.User;
+import hu.djani.Manager.service.AuthorizationService;
 import hu.djani.Manager.service.entity.ProjectService;
 import hu.djani.Manager.service.entity.UserService;
 
@@ -25,6 +26,9 @@ public class ApiProjectController {
 	@Autowired
 	UserService userService;
 
+	@Autowired
+	AuthorizationService authService;
+
 	@RequestMapping("/list")
 	public ResponseEntity<List<Project>> listAllProjects() {
 		return ResponseEntity.ok(this.projectService.getList());
@@ -36,33 +40,35 @@ public class ApiProjectController {
 	}
 
 	@RequestMapping("/delete/{id}")
-	public ResponseEntity<Void> deleteProjectById(@PathVariable(required = true) Integer id) {
+	public ResponseEntity<Void> deleteProjectById(@PathVariable(required = true) Integer id,
+			@AuthenticationPrincipal User principal) {
 
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (!(principal instanceof User)) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		}
 
-		Long userId = ((User) principal).getId();
-		if (this.userService.getById(userId).getProjects().contains(this.projectService.getById(id))) {
-			this.projectService.deleteById(id);
-			return ResponseEntity.accepted().build();
+		if (!projectService.exists(id)) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 
-		return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		if (!authService.isCurrentUserOwnerOf(projectService.getById(id))) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+		}
+
+		this.projectService.deleteById(id);
+		return ResponseEntity.accepted().build();
 	}
 
 	@RequestMapping("/create/{name}")
-	public ResponseEntity<Void> createProjectWithName(@PathVariable(required = true) String name) {
+	public ResponseEntity<Void> createProjectWithName(@PathVariable(required = true) String name,
+			@AuthenticationPrincipal User principal) {
 
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (!(principal instanceof User)) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		}
+		User user = principal;
 
-		User user = (User) principal;
 		Project project = new Project(name);
-
 		project.addOwner(user);
 
 		this.projectService.save(project);
