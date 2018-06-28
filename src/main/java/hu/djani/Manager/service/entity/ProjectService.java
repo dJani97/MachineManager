@@ -29,4 +29,8 @@ public class ProjectService {
 	public void deleteById(Integer id) {
 		this.dao.deleteById(id);
 	}
+
+	public boolean exists(Integer id) {
+		return this.dao.existsById(id);
+	}
 }

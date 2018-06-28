@@ -32,4 +32,8 @@ public class UserRoleService {
 		return this.roleDao.findByAuthority(roleName);
 	}
 
+	public boolean exists(Long id) {
+		return this.roleDao.existsById(id);
+	}
+
 }

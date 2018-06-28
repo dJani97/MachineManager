@@ -95,7 +95,10 @@ public class UserService implements UserDetailsService {
 		this.sessionRegistry.forceLogout(user);
 
 		this.userDao.deleteById(id);
+	}
 
+	public boolean exists(Long id) {
+		return this.userDao.existsById(id);
 	}
 
 }
