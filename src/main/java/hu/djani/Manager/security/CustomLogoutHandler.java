@@ -18,8 +18,10 @@ public class CustomLogoutHandler implements LogoutHandler {
 
 	@Override
 	public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-		User principal = (User) authentication.getPrincipal();
-		this.sessionRegistryImpl.forceLogout(principal);
+		if (authentication != null) {
+			User principal = (User) authentication.getPrincipal();
+			this.sessionRegistryImpl.forceLogout(principal);
+		}
 	}
 
 }
