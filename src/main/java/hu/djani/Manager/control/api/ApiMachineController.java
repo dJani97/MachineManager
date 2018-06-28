@@ -43,7 +43,7 @@ public class ApiMachineController {
 	@RequestMapping("/ping/{address}")
 	public ResponseEntity<Boolean> isReachable(@PathVariable(required = true) String address) {
 		// System.out.println("ping called with: " + address);
-		return ResponseEntity.ok(this.pingComponent.isReachable(address, 100));
+		return ResponseEntity.ok(this.pingComponent.isReachable(address));
 	}
 
 	@RequestMapping("/listRunning")
@@ -67,7 +67,7 @@ public class ApiMachineController {
 		// @formatter:off
 
 		machines.parallelStream()
-			.filter(m -> this.pingComponent.isReachable(m.getAddress(), 100))
+			.filter(m -> this.pingComponent.isReachable(m.getAddress()))
 			.forEach(machine -> reachableMachines.add(machine));
 
 		return reachableMachines;
