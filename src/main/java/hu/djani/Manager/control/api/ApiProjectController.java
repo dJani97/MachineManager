@@ -35,8 +35,13 @@ public class ApiProjectController {
 	}
 
 	@RequestMapping("/{id}")
-	public ResponseEntity<Project> getMachineById(@PathVariable(required = true) Integer id) {
-		return ResponseEntity.ok(this.projectService.getById(id));
+	public ResponseEntity<Project> getProjectById(@PathVariable(required = true) Integer id) {
+		Project project = this.projectService.getById(id);
+		System.out.println(project);
+		if (project == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		return ResponseEntity.ok(project);
 	}
 
 	@RequestMapping("/delete/{id}")
