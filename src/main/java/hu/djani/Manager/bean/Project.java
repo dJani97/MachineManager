@@ -22,6 +22,7 @@ import javax.validation.constraints.Size;
 import org.springframework.data.annotation.CreatedDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
@@ -33,6 +34,7 @@ import lombok.ToString;
 @Data
 @EqualsAndHashCode(of = "id")
 @ToString(exclude = { "groups", "owners" })
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Project {
 
 	public Project() {
